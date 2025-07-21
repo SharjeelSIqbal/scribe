@@ -1,9 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: ['class'],
-    content: [
+  darkMode: ['class'],
+  content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
+    'packages/renderer/src/**/*.{ts,tsx,js,jsx,html}',
+    'packages/preload/src/**/*.{ts,tsx}',
   ],
   theme: {
   	extend: {
@@ -59,5 +61,5 @@ export default {
   corePlugins: {
     preflight: false,
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require('tailwindcss-animate')],
 }
