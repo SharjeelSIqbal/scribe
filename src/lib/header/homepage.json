@@ -1,0 +1,8 @@
+{
+  "title": "Home",
+  "subTitle": "home sub title",
+  "entries": [
+    { "title": "Settings", "route": "./settings" },
+    { "title": "Notes", "route": "./settings" }
+  ]
+}
