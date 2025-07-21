@@ -1,9 +1,10 @@
+import react from '@vitejs/plugin-react'
 import { rmSync } from 'node:fs'
 import path from 'node:path'
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import electron from 'vite-plugin-electron/simple'
 import pkg from './package.json'
+import tailwindcss from 'tailwindcss'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -16,18 +17,19 @@ export default defineConfig(({ command }) => {
   return {
     resolve: {
       alias: {
-        '@': path.join(__dirname, 'src')
+        '@': path.join(__dirname, 'src'),
       },
     },
     plugins: [
       react(),
+      tailwindcss(),
       electron({
         main: {
           // Shortcut of `build.lib.entry`
           entry: 'electron/main/index.ts',
           onstart(args) {
             if (process.env.VSCODE_DEBUG) {
-              console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App')
+              console.log(/* For `.vscode/.debug.script.mjs` */ '[startup] Electron App')
             } else {
               args.startup()
             }
@@ -64,13 +66,15 @@ export default defineConfig(({ command }) => {
         renderer: {},
       }),
     ],
-    server: process.env.VSCODE_DEBUG && (() => {
-      const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
-      return {
-        host: url.hostname,
-        port: +url.port,
-      }
-    })(),
+    server:
+      process.env.VSCODE_DEBUG &&
+      (() => {
+        const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
+        return {
+          host: url.hostname,
+          port: +url.port,
+        }
+      })(),
     clearScreen: false,
   }
 })
