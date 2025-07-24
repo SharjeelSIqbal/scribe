@@ -12,7 +12,12 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
-  settings: { react: { version: 'detect' } },
+  settings: {
+    react: { version: 'detect' },
+    'import/resolver': {
+      node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
+    },
+  },
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     '@typescript-eslint/explicit-function-return-type': 'off',
