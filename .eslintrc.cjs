@@ -1,18 +1,22 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
-  rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    project: './tsconfig.json',
+    tsconfigRootDir: __dirname,
   },
-}
+  extends: [
+    'airbnb',
+    'airbnb-typescript',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
+  settings: { react: { version: 'detect' } },
+  rules: {
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    '@typescript-eslint/explicit-function-return-type': 'off',
+  },
+
+  ignorePatterns: ['package.json', 'package-lock.json', '*.css', '*.json'],
+};
