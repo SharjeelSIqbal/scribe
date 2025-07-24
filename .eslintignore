@@ -1,15 +1,9 @@
-node_modules
-dist
-out
-.vscode
-build
-
-
-
+# ignore lockfiles, manifests, built dist
 package.json
 package-lock.json
 yarn.lock
-
+dist-electron
 *.css
 *.json
-*.lock
+tsconfig.json
+vite.config.ts
