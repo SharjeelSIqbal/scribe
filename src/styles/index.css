@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@import "./themes/abyss.css";
+@import "./themes/bumble-bee.css";
+@import "./themes/caramellate.css";
+@import "./themes/dark.css";
+@import "./themes/dim.css";
+@import "./themes/fantasy.css";
+@import "./themes/light.css";
+@import "./themes/night.css";
+@import "./themes/retro.css";
+@import "./themes/slik.css";
+@import "./themes/sunset.css";
+@import "./themes/aqua.css";
+@import "./themes/winter.css";
