@@ -1,13 +1,16 @@
-import { useState, ChangeEvent, useRef } from 'react';
+import { useState, ChangeEvent, useRef, useEffect } from 'react';
 import NoteContainer from './NoteContainer';
+// import { ipcRenderer } from 'electron';
+// import { DEBOUNCE_DELAY } from '../../libs/contants';
 
-const PLACEHOLDER_TEXT_NOTES = 'Set a spark to your imagination and start writing.';
+const PLACEHOLDER_TEXT_NOTES = 'Start jotting down your ideas.';
 const PLACEHOLDER_TEXT_TITLE = 'Title';
 
 function Notes(): JSX.Element {
-  const [input, setInput] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
   const [text, setText] = useState<string>('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  // const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
@@ -17,20 +20,22 @@ function Notes(): JSX.Element {
     el.style.height = `${el.scrollHeight}px`;
   };
 
-  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+  const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
+
+  useEffect(() => {}, [text, title]);
 
   return (
     <NoteContainer>
       <div className="flex w-full flex-col lg:flex-col">
         <div className="py-1.5">
           <input
-            value={input}
-            onChange={handleChangeInput}
+            value={title}
+            onChange={handleChangeTitle}
             type="text"
             placeholder={PLACEHOLDER_TEXT_TITLE}
-            className="input-ghost input-xl w-full focus:outline-none bg-transparent focus:bg-transparent"
+            className="input-ghost input-2xl w-full focus:outline-none bg-transparent focus:bg-transparent"
           />
         </div>
         <div className="py-1.5">

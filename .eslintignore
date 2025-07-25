@@ -6,3 +6,6 @@ dist-electron
 tsconfig.json
 vite.config.ts
 *.config.ts
+release
+dist
+**/*.md
