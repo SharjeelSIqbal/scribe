@@ -3,8 +3,6 @@ package.json
 package-lock.json
 yarn.lock
 dist-electron
-*.css
-*.json
 tsconfig.json
 vite.config.ts
 *.config.ts

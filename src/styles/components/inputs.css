@@ -1,0 +1,4 @@
+.input-2xl {
+  --size: calc(var(--size-field, 0.25rem) * 14);
+  font-size: 2.75rem;
+}

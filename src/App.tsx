@@ -3,7 +3,7 @@ import ThemeDropDown from './components/theme/ThemeDropDown';
 
 function App() {
   return (
-    <main className="h-full w-full">
+    <main className="h-full w-full bg-neutral">
       <Notes />
       <h1>Hello World!</h1>
       <ThemeDropDown />
