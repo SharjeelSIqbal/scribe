@@ -2,6 +2,8 @@ import { app, BrowserWindow } from 'electron';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import pollingInterval from './utils/polling-interval';
+import { getDiagnostics } from './utils/resource-manager';
 
 createRequire(import.meta.url);
 const __dirnam = path.dirname(fileURLToPath(import.meta.url));
@@ -65,6 +67,10 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+app.on('ready', function () {
+  pollingInterval(getDiagnostics);
 });
 
 app.whenReady().then(createWindow);

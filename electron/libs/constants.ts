@@ -1,0 +1,4 @@
+const POLLING_INTERVAL = 500;
+const PLACE_HOLDER = 'Place holder';
+
+export { POLLING_INTERVAL, PLACE_HOLDER };
