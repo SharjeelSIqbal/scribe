@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import pollingInterval from './utils/polling-interval';
 import { getDiagnostics } from './utils/resource-manager';
+import { screen } from 'electron';
 
 createRequire(import.meta.url);
 const __dirnam = path.dirname(fileURLToPath(import.meta.url));
@@ -31,8 +32,16 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
 let win: BrowserWindow | null;
 
 function createWindow() {
+  const primaryWindowScreenSize = screen.getPrimaryDisplay().workAreaSize;
+  const { width, height } = primaryWindowScreenSize;
+  const minWidth = Math.round(width * 0.6);
+  const minHeight = Math.round(height * 0.8);
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    width: minWidth,
+    height: minHeight,
+    minWidth,
+    minHeight,
     webPreferences: {
       preload: path.join(__dirnam, 'preload.mjs'),
     },
