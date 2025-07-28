@@ -25,8 +25,9 @@ export default function SidebarToggleButton({
   return (
     <button
       onClick={handleClick}
-      className="button-hover"
+      className="button-hover tooltip tooltip-right"
       aria-label="Toggle Sidebar"
+      data-tip="Toggle Sidebar"
       disabled={isRotating}
       type="button"
     >

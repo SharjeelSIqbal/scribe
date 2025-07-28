@@ -24,12 +24,17 @@
     ]
   },
   "dependencies": {
+    "@lexical/history": "^0.33.1",
+    "@lexical/react": "^0.33.1",
+    "@lexical/rich-text": "^0.33.1",
     "@tailwindcss/vite": "^4.1.11",
     "framer-motion": "^12.23.11",
+    "lexical": "^0.33.1",
     "lucide-react": "^0.532.0",
     "os-utils": "^0.0.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {

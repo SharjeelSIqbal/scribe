@@ -10,10 +10,7 @@ export default function Sidebar(): JSX.Element {
       <aside
         className={`bg-base-200 text-base-content border-r border-base-300 h-full p-0 pt-4 pb-4 ${collapsed ? 'w-16' : 'w-64'} transition-all`}
       >
-        <div
-          className={`flex ${collapsed ? 'justify-center' : 'justify-end'} mb-6 tooltip tooltip-right`}
-          data-tip="Toggle sidebar"
-        >
+        <div className={`flex ${collapsed ? 'justify-center' : 'justify-end'} mb-6`}>
           <SidebarToggleButton collapsed={collapsed} setCollapsed={setCollapsed} />
         </div>
         <ul className="menu space-y-2 p-0 w-full">
