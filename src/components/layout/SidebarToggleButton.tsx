@@ -25,7 +25,7 @@ export default function SidebarToggleButton({
   return (
     <button
       onClick={handleClick}
-      className="btn btn-ghost hover:bg-transparent focus:outline-none focus:ring-0"
+      className="button-hover"
       aria-label="Toggle Sidebar"
       disabled={isRotating}
       type="button"
