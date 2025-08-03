@@ -77,7 +77,6 @@ export default function Editor(): JSX.Element {
         }
         ErrorBoundary={LexicalErrorBoundary}
       />
-
       <HistoryPlugin />
       <MyOnChangePlugin onChange={handleEditorChange} editableRef={editableRef} />
     </LexicalComposer>
