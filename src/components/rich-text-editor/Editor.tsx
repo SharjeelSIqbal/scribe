@@ -10,6 +10,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { EditorState } from 'lexical';
 import { MyOnChangePluginProps } from './LexicalProps';
+import Toolbar from './Toolbar';
 
 const theme = {};
 const PLACEHOLDER_TEXT = 'Start writing...';
@@ -62,6 +63,7 @@ export default function Editor(): JSX.Element {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
+      <Toolbar />
       <ListPlugin />
       <RichTextPlugin
         contentEditable={
@@ -72,7 +74,7 @@ export default function Editor(): JSX.Element {
         }
         placeholder={
           <div aria-placeholder={PLACEHOLDER_TEXT} className="placeholder">
-            ${PLACEHOLDER_TEXT}
+            {PLACEHOLDER_TEXT}
           </div>
         }
         ErrorBoundary={LexicalErrorBoundary}
