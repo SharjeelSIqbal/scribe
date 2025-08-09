@@ -49,38 +49,32 @@ type HeadingOptions = {
 
 const HEADING_OPTIONS: HeadingOptions[] = [
   {
-    level: 1,
-    label: 'Heading 1',
-    icon: <Heading1 className="w-4 h-4" />,
-    className: 'text-2xl font-bold',
-  },
-  {
     level: 2,
-    label: 'Heading 2',
+    label: 'Heading 1',
     icon: <Heading2 className="w-4 h-4" />,
     className: 'text-xl font-semibold',
   },
   {
     level: 3,
-    label: 'Heading 3',
+    label: 'Heading 2',
     icon: <Heading3 className="w-4 h-4" />,
     className: 'text-lg font-semibold',
   },
   {
     level: 4,
-    label: 'Heading 4',
+    label: 'Heading 3',
     icon: <Heading4 className="w-4 h-4" />,
     className: 'text-base font-medium',
   },
   {
     level: 5,
-    label: 'Heading 5',
+    label: 'Heading 4',
     icon: <Heading5 className="w-4 h-4" />,
     className: 'text-sm font-medium',
   },
   {
     level: 6,
-    label: 'Heading 6',
+    label: 'Heading 5',
     icon: <Heading6 className="w-4 h-4" />,
     className: 'text-xs font-medium uppercase',
   },

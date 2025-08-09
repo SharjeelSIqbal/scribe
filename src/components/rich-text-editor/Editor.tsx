@@ -12,7 +12,17 @@ import { EditorState } from 'lexical';
 import { MyOnChangePluginProps } from './LexicalProps';
 import Toolbar from './Toolbar';
 
-const theme = {};
+const theme = {
+  paragraph: 'text-base leading-relaxed',
+  heading: {
+    h1: 'text-4xl font-bold leading-tight mb-4',
+    h2: 'text-3xl font-semibold leading-snug mb-3',
+    h3: 'text-2xl font-semibold leading-snug mb-2',
+    h4: 'text-xl font-medium leading-snug mb-2',
+    h5: 'text-lg font-medium leading-snug mb-1',
+    h6: 'text-base font-medium uppercase tracking-wide mb-1',
+  },
+};
 const PLACEHOLDER_TEXT = 'Start writing...';
 
 // OnChangePlugin!
@@ -65,20 +75,25 @@ export default function Editor(): JSX.Element {
     <LexicalComposer initialConfig={initialConfig}>
       <Toolbar />
       <ListPlugin />
-      <RichTextPlugin
-        contentEditable={
-          <ContentEditable
-            ref={editableRef}
-            className="contentEditable textarea-ghost h-full resize-none w-full focus:outline-none focus:bg-transparent"
-          />
-        }
-        placeholder={
-          <div aria-placeholder={PLACEHOLDER_TEXT} className="placeholder">
-            {PLACEHOLDER_TEXT}
-          </div>
-        }
-        ErrorBoundary={LexicalErrorBoundary}
-      />
+      <div className="relative py-1">
+        <RichTextPlugin
+          contentEditable={
+            <ContentEditable
+              ref={editableRef}
+              className="contentEditable textarea-ghost h-full resize-none w-full focus:outline-none focus:bg-transparent relative z-10"
+            />
+          }
+          placeholder={
+            <div
+              aria-placeholder={PLACEHOLDER_TEXT}
+              className="placeholder text-secondary-content absolute top-0 left-0 z-0 py-1"
+            >
+              {PLACEHOLDER_TEXT}
+            </div>
+          }
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+      </div>
       <HistoryPlugin />
       <MyOnChangePlugin onChange={handleEditorChange} editableRef={editableRef} />
     </LexicalComposer>

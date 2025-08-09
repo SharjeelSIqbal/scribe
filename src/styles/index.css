@@ -2,6 +2,7 @@
 @plugin "daisyui";
 @import './components/inputs.css';
 @import './components/button.css';
+@import './typography/text.css';
 
 @import './themes/abyss.css';
 @import './themes/bumble-bee.css';
