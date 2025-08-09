@@ -15,12 +15,12 @@ import Toolbar from './Toolbar';
 const theme = {
   paragraph: 'text-base leading-relaxed',
   heading: {
-    h1: 'text-4xl font-bold leading-tight mb-4',
-    h2: 'text-3xl font-semibold leading-snug mb-3',
-    h3: 'text-2xl font-semibold leading-snug mb-2',
-    h4: 'text-xl font-medium leading-snug mb-2',
-    h5: 'text-lg font-medium leading-snug mb-1',
-    h6: 'text-base font-medium uppercase tracking-wide mb-1',
+    h1: 'lexical-heading-h1',
+    h2: 'lexical-heading-h2',
+    h3: 'lexical-heading-h3',
+    h4: 'lexical-heading-h4',
+    h5: 'lexical-heading-h5',
+    h6: 'lexical-heading-h6',
   },
 };
 const PLACEHOLDER_TEXT = 'Start writing...';
