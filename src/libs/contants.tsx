@@ -1,0 +1,127 @@
+import {
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  Pilcrow,
+} from 'lucide-react';
+import { HeadingOption, AlignOption } from '../types/types';
+
+const APP_NAME = 'Scribe';
+const SOME_PLACE_HODLER = 'Some Place Holder';
+const DEBOUNCE_DELAY = 500;
+
+// Toolbar Constants
+
+const HEADING_1 = 'Heading 1';
+const HEADING_2 = 'Heading 2';
+const HEADING_3 = 'Heading 3';
+const HEADING_4 = 'Heading 4';
+const HEADING_5 = 'Heading 5';
+const HEADING_6 = 'Heading 6';
+const HEADING_OPTIONS_LABEL = 'Heading options';
+const BOLD_LABEL = 'Bold';
+const ITALIC_LABEL = 'Italic';
+const UNDERLINE_LABEL = 'Underline';
+const STRIKETHROUGH_LABEL = 'Strikethrough';
+const BULLET_LIST = 'Bullet List';
+const NUMBERED_LIST = 'Numbered List';
+const REMOVE_LIST = 'Remove List';
+const INSERT_LINK = 'Insert Link';
+const REMOVE_LINK = 'Remove Link';
+const UNDO_LABEL = 'Undo';
+const REDO_LABEL = 'Redo';
+
+const HEADING_OPTIONS: HeadingOption[] = [
+  {
+    level: 1,
+    label: HEADING_1,
+    icon: <Heading1 className="w-4 h-4" />,
+    className: 'text-4xl font-semibold',
+  },
+  {
+    level: 2,
+    label: HEADING_2,
+    icon: <Heading2 className="w-4 h-4" />,
+    className: 'text-lg font-semibold',
+  },
+  {
+    level: 3,
+    label: HEADING_3,
+    icon: <Heading3 className="w-4 h-4" />,
+    className: 'text-base font-medium',
+  },
+  {
+    level: 4,
+    label: HEADING_4,
+    icon: <Heading4 className="w-4 h-4" />,
+    className: 'text-sm font-medium',
+  },
+  {
+    level: 5,
+    label: HEADING_5,
+    icon: <Heading5 className="w-4 h-4" />,
+    className: 'text-xs font-medium uppercase',
+  },
+  {
+    level: 6,
+    label: HEADING_6,
+    icon: <Heading6 className="w-4 h-4" />,
+    className: 'text-xs font-medium uppercase',
+  },
+  {
+    level: 0,
+    label: 'Paragraph',
+    icon: <Pilcrow className="w-4 h-4" />,
+    className: 'text-sm font-normal',
+  },
+];
+
+const ALIGN_OPTIONS: AlignOption[] = [
+  {
+    value: 'left',
+    label: 'Align Left',
+    icon: <AlignLeft className="w-4 h-4" />,
+  },
+  {
+    value: 'center',
+    label: 'Align Center',
+    icon: <AlignCenter className="w-4 h-4" />,
+  },
+  {
+    value: 'right',
+    label: 'Align Right',
+    icon: <AlignRight className="w-4 h-4" />,
+  },
+  {
+    value: 'justify',
+    label: 'Justify',
+    icon: <AlignJustify className="w-4 h-4" />,
+  },
+];
+
+export {
+  APP_NAME,
+  SOME_PLACE_HODLER,
+  DEBOUNCE_DELAY,
+  ALIGN_OPTIONS,
+  HEADING_OPTIONS,
+  HEADING_OPTIONS_LABEL,
+  BOLD_LABEL,
+  ITALIC_LABEL,
+  UNDERLINE_LABEL,
+  STRIKETHROUGH_LABEL,
+  BULLET_LIST,
+  NUMBERED_LIST,
+  REMOVE_LIST,
+  INSERT_LINK,
+  REMOVE_LINK,
+  UNDO_LABEL,
+  REDO_LABEL,
+};

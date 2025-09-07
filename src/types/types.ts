@@ -1,0 +1,16 @@
+import { ElementFormatType } from 'lexical';
+
+type HeadingOption = {
+  level: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  label: string;
+  icon: JSX.Element;
+  className: string;
+};
+
+type AlignOption = {
+  value: ElementFormatType;
+  label: string;
+  icon: JSX.Element;
+};
+
+export type { HeadingOption, AlignOption };
