@@ -54,7 +54,7 @@ import {
   LEFT,
   HEADING_TAGS,
 } from '../../libs/contants';
-import { registerToolbarCommands } from '../../editor/registerCommands';
+import registerToolbarCommands from '../../editor/registerCommands';
 
 function setHeadingLevel(editor: LexicalEditor, level: 0 | 1 | 2 | 3 | 4 | 5 | 6): void {
   editor.update(() => {
