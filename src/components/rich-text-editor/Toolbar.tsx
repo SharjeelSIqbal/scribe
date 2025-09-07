@@ -1,17 +1,4 @@
 import {
-  $getSelection,
-  $isRangeSelection,
-  $createParagraphNode,
-  FORMAT_TEXT_COMMAND,
-  UNDO_COMMAND,
-  REDO_COMMAND,
-  COMMAND_PRIORITY_CRITICAL,
-  LexicalEditor,
-  $getRoot,
-  $isTextNode,
-  TextNode,
-} from 'lexical';
-import {
   INSERT_UNORDERED_LIST_COMMAND,
   INSERT_ORDERED_LIST_COMMAND,
   REMOVE_LIST_COMMAND,
@@ -24,12 +11,6 @@ import {
   Underline,
   Strikethrough,
   Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-  Heading6,
-  Pilcrow,
   List,
   ListOrdered,
   LinkIcon,
@@ -37,54 +18,43 @@ import {
   Undo,
   Redo,
   ListTodo,
+  AlignLeft,
 } from 'lucide-react';
 import { $createHeadingNode } from '@lexical/rich-text';
-
-type HeadingOptions = {
-  level: 0 | 1 | 2 | 3 | 4 | 5 | 6;
-  label: string;
-  icon: JSX.Element;
-  className: string;
-};
-
-const HEADING_OPTIONS: HeadingOptions[] = [
-  {
-    level: 2,
-    label: 'Heading 1',
-    icon: <Heading2 className="w-4 h-4" />,
-    className: 'text-xl font-semibold',
-  },
-  {
-    level: 3,
-    label: 'Heading 2',
-    icon: <Heading3 className="w-4 h-4" />,
-    className: 'text-lg font-semibold',
-  },
-  {
-    level: 4,
-    label: 'Heading 3',
-    icon: <Heading4 className="w-4 h-4" />,
-    className: 'text-base font-medium',
-  },
-  {
-    level: 5,
-    label: 'Heading 4',
-    icon: <Heading5 className="w-4 h-4" />,
-    className: 'text-sm font-medium',
-  },
-  {
-    level: 6,
-    label: 'Heading 5',
-    icon: <Heading6 className="w-4 h-4" />,
-    className: 'text-xs font-medium uppercase',
-  },
-  {
-    level: 0,
-    label: 'Paragraph',
-    icon: <Pilcrow className="w-4 h-4" />,
-    className: 'text-sm font-normal',
-  },
-];
+import {
+  $createParagraphNode,
+  $getRoot,
+  $getSelection,
+  $isRangeSelection,
+  $isTextNode,
+  ElementFormatType,
+  FORMAT_ELEMENT_COMMAND,
+  FORMAT_TEXT_COMMAND,
+  LexicalEditor,
+  REDO_COMMAND,
+  TextNode,
+  UNDO_COMMAND,
+} from 'lexical';
+import {
+  HEADING_OPTIONS,
+  ALIGN_OPTIONS,
+  HEADING_OPTIONS_LABEL,
+  BOLD_LABEL,
+  ITALIC_LABEL,
+  UNDERLINE_LABEL,
+  STRIKETHROUGH_LABEL,
+  BULLET_LIST,
+  NUMBERED_LIST,
+  REMOVE_LIST,
+  INSERT_LINK,
+  REMOVE_LINK,
+  UNDO_LABEL,
+  REDO_LABEL,
+  ALIGNMENT_OPTIONS_LABEL,
+  LEFT,
+  HEADING_TAGS,
+} from '../../libs/contants';
+import { registerToolbarCommands } from '../../editor/registerCommands';
 
 function setHeadingLevel(editor: LexicalEditor, level: 0 | 1 | 2 | 3 | 4 | 5 | 6): void {
   editor.update(() => {
@@ -101,9 +71,7 @@ function setHeadingLevel(editor: LexicalEditor, level: 0 | 1 | 2 | 3 | 4 | 5 | 6
       if (!isTopLevel) return;
 
       const newBlock =
-        level === 0
-          ? $createParagraphNode()
-          : $createHeadingNode(`h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6');
+        level === 0 ? $createParagraphNode() : $createHeadingNode(HEADING_TAGS[level]);
 
       parent.replace(newBlock);
 
@@ -120,41 +88,22 @@ export default function EditorToolbar() {
   const [editor] = useLexicalComposerContext();
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
+  const [align, setAlign] = useState<ElementFormatType | string>(LEFT);
 
   useEffect(() => {
-    const unregisterUndo = editor.registerCommand<boolean>(
-      UNDO_COMMAND,
-      (payload) => {
-        setCanUndo(payload);
-        return false;
-      },
-      COMMAND_PRIORITY_CRITICAL
-    );
+    const toolbarCommands = registerToolbarCommands(editor, { setAlign, setCanUndo, setCanRedo });
 
-    const unregisterRedo = editor.registerCommand<boolean>(
-      REDO_COMMAND,
-      (payload) => {
-        setCanRedo(payload);
-        return false;
-      },
-      COMMAND_PRIORITY_CRITICAL
-    );
-
-    return () => {
-      unregisterUndo();
-      unregisterRedo();
-    };
+    return toolbarCommands;
   }, [editor]);
 
   return (
     <div className="flex items-center flex-wrap gap-3 p-3 border-b border-base-300 bg-base-200">
-      {/* Formatting group */}
       <div className="flex gap-2">
         <button
           type="button"
           onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Bold"
+          title={BOLD_LABEL}
         >
           <Bold className="w-5 h-5" />
         </button>
@@ -162,7 +111,7 @@ export default function EditorToolbar() {
           type="button"
           onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Italic"
+          title={ITALIC_LABEL}
         >
           <Italic className="w-5 h-5" />
         </button>
@@ -170,7 +119,7 @@ export default function EditorToolbar() {
           type="button"
           onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Underline"
+          title={UNDERLINE_LABEL}
         >
           <Underline className="w-5 h-5" />
         </button>
@@ -178,13 +127,12 @@ export default function EditorToolbar() {
           type="button"
           onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Strikethrough"
+          title={STRIKETHROUGH_LABEL}
         >
           <Strikethrough className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Heading/Paragraph group */}
       <div className="dropdown dropdown-hover button-hover">
         <button
           type="button"
@@ -192,14 +140,14 @@ export default function EditorToolbar() {
           tabIndex={0}
           aria-haspopup="true"
           aria-expanded="false"
-          aria-label="Heading options"
+          aria-label={HEADING_OPTIONS_LABEL}
           onClick={(e) => e.preventDefault()}
         >
           <Heading1 className="w-5 h-5" />
         </button>
         <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52">
           {HEADING_OPTIONS.map((heading, index) => (
-            <li key={heading.level} tabIndex={index}>
+            <li key={heading.level} tabIndex={index} className="flex-nowrap">
               <button
                 type="button"
                 onClick={() => setHeadingLevel(editor, heading.level)}
@@ -213,13 +161,12 @@ export default function EditorToolbar() {
         </ul>
       </div>
 
-      {/* Lists */}
       <div className="flex gap-2">
         <button
           type="button"
           onClick={() => editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined)}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Bullet List"
+          title={BULLET_LIST}
         >
           <List className="w-5 h-5" />
         </button>
@@ -227,7 +174,7 @@ export default function EditorToolbar() {
           type="button"
           onClick={() => editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined)}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Numbered List"
+          title={NUMBERED_LIST}
         >
           <ListOrdered className="w-5 h-5" />
         </button>
@@ -235,19 +182,18 @@ export default function EditorToolbar() {
           type="button"
           onClick={() => editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined)}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Remove List"
+          title={REMOVE_LIST}
         >
           <ListTodo className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Links (placeholder actions) */}
       <div className="flex gap-2">
         <button
           type="button"
           onClick={(e) => e.preventDefault()}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Insert Link"
+          title={INSERT_LINK}
         >
           <LinkIcon className="w-5 h-5" />
         </button>
@@ -255,19 +201,48 @@ export default function EditorToolbar() {
           type="button"
           onClick={(e) => e.preventDefault()}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Remove Link"
+          title={REMOVE_LINK}
         >
           <Link2Off className="w-5 h-5" />
         </button>
+        <div className="dropdown dropdown-hover button-hover">
+          <button
+            type="button"
+            className="btn btn-sm btn-ghost p-2"
+            tabIndex={0}
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label={ALIGNMENT_OPTIONS_LABEL}
+            onClick={(e) => e.preventDefault()}
+          >
+            {ALIGN_OPTIONS.find((opt) => opt.value === align)?.icon ?? (
+              <AlignLeft className="w-5 h-5" />
+            )}
+          </button>
+          <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-40">
+            {ALIGN_OPTIONS.map((option, index) => (
+              <li key={option.value} tabIndex={index}>
+                <button
+                  type="button"
+                  onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, option.value)}
+                  className={`flex items-center gap-2 sidebar-hover px-2 py-1 ${
+                    align === option.value ? 'bg-base-300 rounded' : ''
+                  }`}
+                >
+                  {option.icon}
+                  {option.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-
-      {/* Undo/Redo */}
       <div className="flex gap-2 ml-auto">
         <button
           type="button"
           onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Undo"
+          title={UNDO_LABEL}
           disabled={!canUndo}
         >
           <Undo className="w-5 h-5" />
@@ -276,7 +251,7 @@ export default function EditorToolbar() {
           type="button"
           onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
           className="sidebar-hover p-2 rounded button-hover"
-          title="Redo"
+          title={REDO_LABEL}
           disabled={!canRedo}
         >
           <Redo className="w-5 h-5" />

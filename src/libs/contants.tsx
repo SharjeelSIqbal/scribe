@@ -11,21 +11,28 @@ import {
   Heading6,
   Pilcrow,
 } from 'lucide-react';
-import { HeadingOption, AlignOption } from '../types/types';
+import { HeadingOption, AlignOption, HeadingTag } from '../types/types';
 
 const APP_NAME = 'Scribe';
 const SOME_PLACE_HODLER = 'Some Place Holder';
 const DEBOUNCE_DELAY = 500;
 
 // Toolbar Constants
-
 const HEADING_1 = 'Heading 1';
 const HEADING_2 = 'Heading 2';
 const HEADING_3 = 'Heading 3';
 const HEADING_4 = 'Heading 4';
 const HEADING_5 = 'Heading 5';
 const HEADING_6 = 'Heading 6';
-const HEADING_OPTIONS_LABEL = 'Heading options';
+const PARAGRAPH = 'PARAGRAPH';
+const H1 = 'h1';
+const H2 = 'h2';
+const H3 = 'h3';
+const H4 = 'h4';
+const H5 = 'h5';
+const H6 = 'h6';
+const HEADING_OPTIONS_LABEL = 'Heading Options';
+const ALIGNMENT_OPTIONS_LABEL = 'Alignment Options';
 const BOLD_LABEL = 'Bold';
 const ITALIC_LABEL = 'Italic';
 const UNDERLINE_LABEL = 'Underline';
@@ -37,6 +44,23 @@ const INSERT_LINK = 'Insert Link';
 const REMOVE_LINK = 'Remove Link';
 const UNDO_LABEL = 'Undo';
 const REDO_LABEL = 'Redo';
+const ALIGN_LEFT_LABEL = 'Align Left';
+const LEFT = 'left';
+const ALIGN_CENTER_LABEL = 'Align Center';
+const CENTER = 'center';
+const ALIGN_RIGHT_LABEL = 'Align Right';
+const RIGHT = 'right';
+const ALIGN_JUSTIFY_LABEL = 'Align Justify';
+const JUSTIFY = 'justify';
+
+const HEADING_TAGS: Record<1 | 2 | 3 | 4 | 5 | 6, HeadingTag> = {
+  1: H1,
+  2: H2,
+  3: H3,
+  4: H4,
+  5: H5,
+  6: H6,
+};
 
 const HEADING_OPTIONS: HeadingOption[] = [
   {
@@ -77,7 +101,7 @@ const HEADING_OPTIONS: HeadingOption[] = [
   },
   {
     level: 0,
-    label: 'Paragraph',
+    label: PARAGRAPH,
     icon: <Pilcrow className="w-4 h-4" />,
     className: 'text-sm font-normal',
   },
@@ -85,23 +109,23 @@ const HEADING_OPTIONS: HeadingOption[] = [
 
 const ALIGN_OPTIONS: AlignOption[] = [
   {
-    value: 'left',
-    label: 'Align Left',
+    value: LEFT,
+    label: ALIGN_LEFT_LABEL,
     icon: <AlignLeft className="w-4 h-4" />,
   },
   {
-    value: 'center',
-    label: 'Align Center',
+    value: CENTER,
+    label: ALIGN_CENTER_LABEL,
     icon: <AlignCenter className="w-4 h-4" />,
   },
   {
-    value: 'right',
-    label: 'Align Right',
+    value: RIGHT,
+    label: ALIGN_RIGHT_LABEL,
     icon: <AlignRight className="w-4 h-4" />,
   },
   {
-    value: 'justify',
-    label: 'Justify',
+    value: JUSTIFY,
+    label: ALIGN_JUSTIFY_LABEL,
     icon: <AlignJustify className="w-4 h-4" />,
   },
 ];
@@ -124,4 +148,21 @@ export {
   REMOVE_LINK,
   UNDO_LABEL,
   REDO_LABEL,
+  ALIGNMENT_OPTIONS_LABEL,
+  ALIGN_LEFT_LABEL,
+  LEFT,
+  ALIGN_CENTER_LABEL,
+  CENTER,
+  ALIGN_RIGHT_LABEL,
+  RIGHT,
+  ALIGN_JUSTIFY_LABEL,
+  JUSTIFY,
+  HEADING_TAGS,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  PARAGRAPH,
 };

@@ -13,4 +13,6 @@ type AlignOption = {
   icon: JSX.Element;
 };
 
-export type { HeadingOption, AlignOption };
+type HeadingTag = `h${1 | 2 | 3 | 4 | 5 | 6}`;
+
+export type { HeadingOption, AlignOption, HeadingTag };
