@@ -25,25 +25,36 @@ const HEADING_4 = 'Heading 4';
 const HEADING_5 = 'Heading 5';
 const HEADING_6 = 'Heading 6';
 const PARAGRAPH = 'PARAGRAPH';
+
 const H1 = 'h1';
 const H2 = 'h2';
 const H3 = 'h3';
 const H4 = 'h4';
 const H5 = 'h5';
 const H6 = 'h6';
+
 const HEADING_OPTIONS_LABEL = 'Heading Options';
 const ALIGNMENT_OPTIONS_LABEL = 'Alignment Options';
+
 const BOLD_LABEL = 'Bold';
 const ITALIC_LABEL = 'Italic';
 const UNDERLINE_LABEL = 'Underline';
 const STRIKETHROUGH_LABEL = 'Strikethrough';
+const BOLD_VALUE = 'bold';
+const ITALIC_VALUE = 'italic';
+const UNDERLINE_VALUE = 'underline';
+const STRIKETHROUGH_VALUE = 'strikethrough';
+
 const BULLET_LIST = 'Bullet List';
 const NUMBERED_LIST = 'Numbered List';
 const REMOVE_LIST = 'Remove List';
+
 const INSERT_LINK = 'Insert Link';
 const REMOVE_LINK = 'Remove Link';
+
 const UNDO_LABEL = 'Undo';
 const REDO_LABEL = 'Redo';
+
 const ALIGN_LEFT_LABEL = 'Align Left';
 const LEFT = 'left';
 const ALIGN_CENTER_LABEL = 'Align Center';
@@ -52,6 +63,8 @@ const ALIGN_RIGHT_LABEL = 'Align Right';
 const RIGHT = 'right';
 const ALIGN_JUSTIFY_LABEL = 'Align Justify';
 const JUSTIFY = 'justify';
+
+const PLACEHOLDER_TEXT = 'Start writing...';
 
 const HEADING_TAGS: Record<1 | 2 | 3 | 4 | 5 | 6, HeadingTag> = {
   1: H1,
@@ -141,6 +154,10 @@ export {
   ITALIC_LABEL,
   UNDERLINE_LABEL,
   STRIKETHROUGH_LABEL,
+  BOLD_VALUE,
+  ITALIC_VALUE,
+  UNDERLINE_VALUE,
+  STRIKETHROUGH_VALUE,
   BULLET_LIST,
   NUMBERED_LIST,
   REMOVE_LIST,
@@ -165,4 +182,5 @@ export {
   H5,
   H6,
   PARAGRAPH,
+  PLACEHOLDER_TEXT,
 };

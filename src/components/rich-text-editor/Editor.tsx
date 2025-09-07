@@ -11,25 +11,11 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import { EditorState } from 'lexical';
 import { MyOnChangePluginProps } from './LexicalProps';
 import Toolbar from './Toolbar';
+import theme from '../../libs/editor-theme';
+import { PLACEHOLDER_TEXT } from '../../libs/contants';
 
-const theme = {
-  paragraph: 'text-base leading-relaxed',
-  heading: {
-    h1: 'lexical-heading-h1',
-    h2: 'lexical-heading-h2',
-    h3: 'lexical-heading-h3',
-    h4: 'lexical-heading-h4',
-    h5: 'lexical-heading-h5',
-    h6: 'lexical-heading-h6',
-  },
-};
-const PLACEHOLDER_TEXT = 'Start writing...';
-
-// OnChangePlugin!
 function MyOnChangePlugin({ onChange, editableRef }: MyOnChangePluginProps) {
-  // Access the editor through the LexicalComposerContext
   const [editor] = useLexicalComposerContext();
-  // Wrap our listener in useEffect to handle the teardown and avoid stale references.
   useEffect(() => {
     return editor.registerUpdateListener(({ editorState }) => {
       onChange(editorState);
@@ -41,13 +27,6 @@ function MyOnChangePlugin({ onChange, editableRef }: MyOnChangePluginProps) {
       }
     });
   }, [editor, onChange, editableRef]);
-  // useEffect(() => {
-  //   // most listeners return a teardown function that can be called to clean them up.
-  //   return editor.registerUpdateListener(({ editorState }) => {
-  //     // call onChange here to pass the latest state up to the parent.
-  //     onChange(editorState);
-  //   });
-  // }, [editor, onChange]);
   return null;
 }
 
@@ -65,7 +44,7 @@ export default function Editor(): JSX.Element {
   }, []);
 
   const initialConfig = {
-    namespace: 'MyEditor',
+    namespace: 'Scribe',
     theme,
     onError,
     nodes: [HeadingNode, ListNode, ListItemNode],

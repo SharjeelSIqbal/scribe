@@ -1,0 +1,5 @@
+const UNDERLINE_STYLE = 'lex-underline';
+const STRIKETHROUGH_STYLE = 'lex-strike';
+const UNDERLINE_STRIKETHROUGH_STYLE = 'lex-underline-strike';
+
+export { UNDERLINE_STYLE, STRIKETHROUGH_STYLE, UNDERLINE_STRIKETHROUGH_STYLE };

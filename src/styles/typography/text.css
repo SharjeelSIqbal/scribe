@@ -27,3 +27,16 @@
 .contentEditable p {
   @apply text-base leading-relaxed;
 }
+
+/* e.g. in your global.css */
+/* robust utilities, only if needed */
+.lex-underline {
+  text-decoration-line: underline;
+}
+.lex-strike {
+  text-decoration-line: line-through;
+}
+/* both at once */
+.lex-underline-strike {
+  text-decoration-line: underline line-through;
+}

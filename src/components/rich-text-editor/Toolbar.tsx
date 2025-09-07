@@ -53,6 +53,10 @@ import {
   ALIGNMENT_OPTIONS_LABEL,
   LEFT,
   HEADING_TAGS,
+  BOLD_VALUE,
+  ITALIC_VALUE,
+  UNDERLINE_VALUE,
+  STRIKETHROUGH_VALUE,
 } from '../../libs/contants';
 import registerToolbarCommands from '../../editor/registerCommands';
 
@@ -101,7 +105,7 @@ export default function EditorToolbar() {
       <div className="flex gap-2">
         <button
           type="button"
-          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
+          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, BOLD_VALUE)}
           className="sidebar-hover p-2 rounded button-hover"
           title={BOLD_LABEL}
         >
@@ -109,7 +113,7 @@ export default function EditorToolbar() {
         </button>
         <button
           type="button"
-          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
+          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, ITALIC_VALUE)}
           className="sidebar-hover p-2 rounded button-hover"
           title={ITALIC_LABEL}
         >
@@ -117,7 +121,7 @@ export default function EditorToolbar() {
         </button>
         <button
           type="button"
-          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
+          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, UNDERLINE_VALUE)}
           className="sidebar-hover p-2 rounded button-hover"
           title={UNDERLINE_LABEL}
         >
@@ -125,7 +129,7 @@ export default function EditorToolbar() {
         </button>
         <button
           type="button"
-          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}
+          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, STRIKETHROUGH_VALUE)}
           className="sidebar-hover p-2 rounded button-hover"
           title={STRIKETHROUGH_LABEL}
         >
@@ -161,6 +165,8 @@ export default function EditorToolbar() {
         </ul>
       </div>
 
+      <div className="divider divider-horizontal mx-0" />
+
       <div className="flex gap-2">
         <button
           type="button"
@@ -187,6 +193,7 @@ export default function EditorToolbar() {
           <ListTodo className="w-5 h-5" />
         </button>
       </div>
+      <div className="divider divider-horizontal mx-1" />
 
       <div className="flex gap-2">
         <button
@@ -205,6 +212,7 @@ export default function EditorToolbar() {
         >
           <Link2Off className="w-5 h-5" />
         </button>
+        <div className="divider divider-horizontal mx-1" />
         <div className="dropdown dropdown-hover button-hover">
           <button
             type="button"
@@ -236,6 +244,7 @@ export default function EditorToolbar() {
             ))}
           </ul>
         </div>
+        <div className="divider divider-horizontal mx-1" />
       </div>
       <div className="flex gap-2 ml-auto">
         <button
