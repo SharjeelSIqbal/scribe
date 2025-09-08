@@ -104,21 +104,6 @@
   animation: scribe-line-in 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* --- Strike-through on unchecked state --- */
-.scribe-checklist li.scribe-check-unchecked .lexical-text::after,
-.scribe-checklist li[aria-checked='false'] .lexical-text::after,
-.scribe-checklist li.scribe-check-unchecked [data-lexical-text]::after,
-.scribe-checklist li[aria-checked='false'] [data-lexical-text]::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0.6em;
-  height: var(--border, 3px);
-  background: var(--color-base-content, oklch(var(--bc)));
-  animation: scribe-line-out 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
 /* --- Pop animation for checkmark tick --- */
 @keyframes scribe-check-pop {
   0% {
