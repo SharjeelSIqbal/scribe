@@ -1,0 +1,9 @@
+.contentEditable li:has(> ul),
+.contentEditable li:has(> ol) {
+  list-style-type: none;
+}
+
+.contentEditable li:has(> ul)::marker,
+.contentEditable li:has(> ol)::marker {
+  content: '';
+}

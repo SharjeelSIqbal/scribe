@@ -2,6 +2,7 @@ import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -61,6 +62,7 @@ export default function Editor(): JSX.Element {
       </div>
       <MyOnChangePlugin onChange={handleEditorChange} editableRef={editableRef} />
       <HistoryPlugin />
+      <TabIndentationPlugin />
     </LexicalComposer>
   );
 }

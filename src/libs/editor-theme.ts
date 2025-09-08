@@ -24,17 +24,14 @@ const theme = {
   },
 
   list: {
-    ul: 'list-disc pl-6 space-y-1',
-    ol: 'list-decimal pl-6 space-y-1',
+    ul: 'pl-6 space-y-1 list-outside',
+    ol: 'pl-6 space-y-1 list-outside',
+
     ulDepth: ['list-disc', 'list-[circle]', 'list-[square]', 'list-disc'],
     olDepth: ['list-decimal', 'list-[lower-alpha]', 'list-[lower-roman]', 'list-decimal'],
 
     listitem: 'my-1 marker:text-base-content marker:opacity-70',
-
-    nested: {
-      list: 'pl-6',
-      listitem: 'my-1',
-    },
+    nested: { list: 'pl-6', listitem: 'my-1' },
 
     checklist: 'list-none pl-2',
     listitemChecked: 'line-through text-base-content/60',
