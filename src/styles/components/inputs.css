@@ -2,3 +2,14 @@
   --size: calc(var(--size-field, 0.25rem) * 14);
   font-size: 2.75rem;
 }
+
+contentEditable.textarea-ghost:focus,
+contentEditable.textarea-ghost:focus-within,
+.scribe-checklist:focus,
+.scribe-checklist:focus-within {
+  @apply bg-base-300;
+}
+
+.scribe-checklist > li:focus-visible {
+  outline: none;
+}

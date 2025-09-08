@@ -1,8 +1,10 @@
+/* --- Remove native bullets when LI contains nested UL/OL --- */
 .contentEditable li:has(> ul),
 .contentEditable li:has(> ol) {
   list-style-type: none;
 }
 
+/* --- Remove markers for nested UL/OL --- */
 .contentEditable li:has(> ul)::marker,
 .contentEditable li:has(> ol)::marker {
   content: '';

@@ -1,7 +1,7 @@
 import {
   INSERT_UNORDERED_LIST_COMMAND,
   INSERT_ORDERED_LIST_COMMAND,
-  REMOVE_LIST_COMMAND,
+  INSERT_CHECK_LIST_COMMAND,
 } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect, useState } from 'react';
@@ -45,7 +45,7 @@ import {
   STRIKETHROUGH_LABEL,
   BULLET_LIST,
   NUMBERED_LIST,
-  REMOVE_LIST,
+  CHECKLIST,
   INSERT_LINK,
   REMOVE_LINK,
   UNDO_LABEL,
@@ -186,9 +186,9 @@ export default function EditorToolbar() {
         </button>
         <button
           type="button"
-          onClick={() => editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined)}
+          onClick={() => editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined)}
           className="sidebar-hover p-2 rounded button-hover"
-          title={REMOVE_LIST}
+          title={CHECKLIST}
         >
           <ListTodo className="w-5 h-5" />
         </button>

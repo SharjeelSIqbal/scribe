@@ -30,12 +30,12 @@ const theme = {
     ulDepth: ['list-disc', 'list-[circle]', 'list-[square]', 'list-disc'],
     olDepth: ['list-decimal', 'list-[lower-alpha]', 'list-[lower-roman]', 'list-decimal'],
 
+    checklist: 'list-none pl-2 scribe-checklist',
+    listitemChecked: 'line-through text-base-content/60 scribe-check-checked',
+    listitemUnchecked: 'text-base-content scribe-check-unchecked',
+
     listitem: 'my-1 marker:text-base-content marker:opacity-70',
     nested: { list: 'pl-6', listitem: 'my-1' },
-
-    checklist: 'list-none pl-2',
-    listitemChecked: 'line-through text-base-content/60',
-    listitemUnchecked: 'text-base-content',
   },
 };
 

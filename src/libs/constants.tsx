@@ -47,7 +47,7 @@ const STRIKETHROUGH_VALUE = 'strikethrough';
 
 const BULLET_LIST = 'Bullet List';
 const NUMBERED_LIST = 'Numbered List';
-const REMOVE_LIST = 'Remove List';
+const CHECKLIST = 'Check List';
 
 const INSERT_LINK = 'Insert Link';
 const REMOVE_LINK = 'Remove Link';
@@ -160,7 +160,7 @@ export {
   STRIKETHROUGH_VALUE,
   BULLET_LIST,
   NUMBERED_LIST,
-  REMOVE_LIST,
+  CHECKLIST,
   INSERT_LINK,
   REMOVE_LINK,
   UNDO_LABEL,

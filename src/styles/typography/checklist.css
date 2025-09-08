@@ -1,0 +1,136 @@
+/* --- Checklist base (UL) --- */
+.contentEditable ul.scribe-checklist {
+  list-style-type: none !important;
+  padding-left: 0.5rem; /* tweak as needed */
+}
+
+/* --- Checklist item (LI) layout --- */
+.scribe-checklist li {
+  position: relative;
+  list-style: none;
+  padding-left: 1.75rem; /* room for the box */
+}
+
+/* --- Remove browser text-decoration when aria-checked true --- */
+.scribe-checklist li[aria-checked='true'] {
+  text-decoration-line: none;
+}
+
+/* --- Checkbox box (::before) --- */
+.scribe-checklist li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  transition:
+    background 175ms cubic-bezier(0.1, 0.1, 0.25, 1),
+    border-color 175ms ease,
+    box-shadow 175ms ease;
+}
+
+/* --- Checkmark tick (::after) --- */
+.scribe-checklist li::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  width: 0.35rem;
+  height: 0.7rem;
+  border-right: 2px solid var(--color-success-content, oklch(var(--suc)));
+  border-bottom: 2px solid var(--color-success-content, oklch(var(--suc)));
+  transform: scale(0) rotate(45deg);
+  transform-origin: left top;
+  opacity: 0;
+}
+
+/* --- Checked state (class or aria) --- */
+.scribe-checklist li.scribe-check-checked::before,
+.scribe-checklist li[aria-checked='true']::before {
+  background: var(--color-success, oklch(var(--su)));
+  border-color: var(--color-success, oklch(var(--su)));
+}
+
+.scribe-checklist li.scribe-check-checked::after,
+.scribe-checklist li[aria-checked='true']::after {
+  opacity: 1;
+  transform: scale(1) rotate(45deg);
+  animation: scribe-check-pop 260ms cubic-bezier(0.2, 0.9, 0.1, 1);
+}
+
+/* --- Strike-through target (text span) --- */
+.scribe-checklist li .lexical-text,
+.scribe-checklist li [data-lexical-text] {
+  position: relative;
+}
+
+/* --- Strike-through animation in (checked) --- */
+@keyframes scribe-line-in {
+  from {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* --- Strike-through animation out (unchecked) --- */
+@keyframes scribe-line-out {
+  from {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  to {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  }
+}
+
+/* --- Strike-through on checked state --- */
+.scribe-checklist li.scribe-check-checked .lexical-text::after,
+.scribe-checklist li[aria-checked='true'] .lexical-text::after,
+.scribe-checklist li.scribe-check-checked [data-lexical-text]::after,
+.scribe-checklist li[aria-checked='true'] [data-lexical-text]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0.6em;
+  height: var(--border, 3px);
+  background: var(--color-base-content, oklch(var(--bc)));
+  animation: scribe-line-in 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* --- Strike-through on unchecked state --- */
+.scribe-checklist li.scribe-check-unchecked .lexical-text::after,
+.scribe-checklist li[aria-checked='false'] .lexical-text::after,
+.scribe-checklist li.scribe-check-unchecked [data-lexical-text]::after,
+.scribe-checklist li[aria-checked='false'] [data-lexical-text]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0.6em;
+  height: var(--border, 3px);
+  background: var(--color-base-content, oklch(var(--bc)));
+  animation: scribe-line-out 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* --- Pop animation for checkmark tick --- */
+@keyframes scribe-check-pop {
+  0% {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
+}

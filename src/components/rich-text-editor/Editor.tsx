@@ -3,6 +3,7 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TabIndentationPlugin } from '@lexical/react/LexicalTabIndentationPlugin';
+import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -40,7 +41,6 @@ export default function Editor(): JSX.Element {
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <Toolbar />
-      <ListPlugin />
       <div className="relative py-1">
         <RichTextPlugin
           contentEditable={
@@ -62,6 +62,8 @@ export default function Editor(): JSX.Element {
       </div>
       <MyOnChangePlugin onChange={handleEditorChange} editableRef={editableRef} />
       <HistoryPlugin />
+      <ListPlugin />
+      <CheckListPlugin />
       <TabIndentationPlugin />
     </LexicalComposer>
   );
