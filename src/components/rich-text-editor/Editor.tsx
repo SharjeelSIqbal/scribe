@@ -48,6 +48,7 @@ export default function Editor(): JSX.Element {
     theme,
     onError,
     nodes: [HeadingNode, ListNode, ListItemNode],
+    movable: true,
   };
 
   return (
@@ -73,8 +74,8 @@ export default function Editor(): JSX.Element {
           ErrorBoundary={LexicalErrorBoundary}
         />
       </div>
-      <HistoryPlugin />
       <MyOnChangePlugin onChange={handleEditorChange} editableRef={editableRef} />
+      <HistoryPlugin />
     </LexicalComposer>
   );
 }

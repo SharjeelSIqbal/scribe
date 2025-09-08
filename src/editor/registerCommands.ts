@@ -5,11 +5,11 @@ import {
   FORMAT_ELEMENT_COMMAND,
   KEY_ENTER_COMMAND,
   SELECTION_CHANGE_COMMAND,
-  UNDO_COMMAND,
-  REDO_COMMAND,
   COMMAND_PRIORITY_CRITICAL,
   COMMAND_PRIORITY_LOW,
   LexicalEditor,
+  CAN_UNDO_COMMAND,
+  CAN_REDO_COMMAND,
 } from 'lexical';
 import { LEFT } from '../libs/contants';
 
@@ -40,7 +40,7 @@ function registerToolbarCommands(
 
   // --- Undo --- //
   const unregisterUndo = editor.registerCommand<boolean>(
-    UNDO_COMMAND,
+    CAN_UNDO_COMMAND,
     (payload) => {
       setCanUndo(payload);
       return false;
@@ -50,7 +50,7 @@ function registerToolbarCommands(
 
   // --- Redo --- //
   const unregisterRedo = editor.registerCommand<boolean>(
-    REDO_COMMAND,
+    CAN_REDO_COMMAND,
     (payload) => {
       setCanRedo(payload);
       return false;
