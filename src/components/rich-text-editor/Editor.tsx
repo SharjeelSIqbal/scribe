@@ -2,17 +2,15 @@ import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { HeadingNode } from '@lexical/rich-text';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
-import { ListNode, ListItemNode } from '@lexical/list';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { EditorState } from 'lexical';
 import { MyOnChangePluginProps } from './LexicalProps';
 import Toolbar from './Toolbar';
-import theme from '../../libs/editor-theme';
 import { PLACEHOLDER_TEXT } from '../../libs/constants';
+import editorConfig from '../../libs/editor-config';
 
 function MyOnChangePlugin({ onChange, editableRef }: MyOnChangePluginProps) {
   const [editor] = useLexicalComposerContext();
@@ -30,11 +28,6 @@ function MyOnChangePlugin({ onChange, editableRef }: MyOnChangePluginProps) {
   return null;
 }
 
-function onError(error: Error): void {
-  // eslint-disable-next-line
-  console.error(error);
-}
-
 export default function Editor(): JSX.Element {
   const [, setEditorState] = useState<EditorState>();
   const editableRef = useRef<HTMLDivElement | null>(null);
@@ -43,16 +36,8 @@ export default function Editor(): JSX.Element {
     setEditorState(editorState);
   }, []);
 
-  const initialConfig = {
-    namespace: 'Scribe',
-    theme,
-    onError,
-    nodes: [HeadingNode, ListNode, ListItemNode],
-    movable: true,
-  };
-
   return (
-    <LexicalComposer initialConfig={initialConfig}>
+    <LexicalComposer initialConfig={editorConfig}>
       <Toolbar />
       <ListPlugin />
       <div className="relative py-1">
