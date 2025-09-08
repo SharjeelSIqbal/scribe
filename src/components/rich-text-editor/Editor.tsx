@@ -12,7 +12,7 @@ import { EditorState } from 'lexical';
 import { MyOnChangePluginProps } from './LexicalProps';
 import Toolbar from './Toolbar';
 import theme from '../../libs/editor-theme';
-import { PLACEHOLDER_TEXT } from '../../libs/contants';
+import { PLACEHOLDER_TEXT } from '../../libs/constants';
 
 function MyOnChangePlugin({ onChange, editableRef }: MyOnChangePluginProps) {
   const [editor] = useLexicalComposerContext();

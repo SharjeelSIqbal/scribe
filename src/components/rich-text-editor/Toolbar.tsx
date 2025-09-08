@@ -57,7 +57,7 @@ import {
   ITALIC_VALUE,
   UNDERLINE_VALUE,
   STRIKETHROUGH_VALUE,
-} from '../../libs/contants';
+} from '../../libs/constants';
 import registerToolbarCommands from '../../editor/registerCommands';
 
 function setHeadingLevel(editor: LexicalEditor, level: 0 | 1 | 2 | 3 | 4 | 5 | 6): void {
