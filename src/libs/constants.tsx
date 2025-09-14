@@ -24,7 +24,7 @@ const HEADING_3 = 'Heading 3';
 const HEADING_4 = 'Heading 4';
 const HEADING_5 = 'Heading 5';
 const HEADING_6 = 'Heading 6';
-const PARAGRAPH = 'PARAGRAPH';
+const PARAGRAPH = 'Paragraph';
 
 const H1 = 'h1';
 const H2 = 'h2';
@@ -86,31 +86,31 @@ const HEADING_OPTIONS: HeadingOption[] = [
     level: 2,
     label: HEADING_2,
     icon: <Heading2 className="w-4 h-4" />,
-    className: 'text-lg font-semibold',
+    className: 'text-3xl font-semibold',
   },
   {
     level: 3,
     label: HEADING_3,
     icon: <Heading3 className="w-4 h-4" />,
-    className: 'text-base font-medium',
+    className: 'text-2xl font-medium',
   },
   {
     level: 4,
     label: HEADING_4,
     icon: <Heading4 className="w-4 h-4" />,
-    className: 'text-sm font-medium',
+    className: 'text-xl font-medium',
   },
   {
     level: 5,
     label: HEADING_5,
     icon: <Heading5 className="w-4 h-4" />,
-    className: 'text-xs font-medium uppercase',
+    className: 'text-lg font-medium',
   },
   {
     level: 6,
     label: HEADING_6,
     icon: <Heading6 className="w-4 h-4" />,
-    className: 'text-xs font-medium uppercase',
+    className: 'text-base font-medium',
   },
   {
     level: 0,

@@ -3,6 +3,16 @@
   background-image: none;
 }
 
+.button-no-color-hover {
+  @apply p-2 rounded-md text-left transition-colors cursor-pointer focus:outline-none;
+  background-color: color-mix(in oklab, var(--color-base-content), transparent);
+  background-image: none !important;
+}
+
+.button-no-color-hover:hover {
+  background-color: color-mix(in oklab, var(--color-base-content), 10%, transparent);
+}
+
 .button-hover:hover {
   background-color: color-mix(in oklab, var(--color-base-content) 10%, transparent);
   box-shadow:
@@ -21,4 +31,17 @@
   background-image: none;
   background-color: transparent;
   border: none;
+}
+
+.toolbar-dropdown-content {
+  top: calc(100% + 1rem);
+  left: 0;
+}
+
+.toolbar-dropdown-content:hover .active {
+  @apply bg-transparent text-nowrap w-[initial];
+}
+
+.toolbar-dropdown-content .active:hover {
+  @apply bg-base-300;
 }

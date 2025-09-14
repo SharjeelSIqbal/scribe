@@ -1,5 +1,6 @@
 import { HeadingNode } from '@lexical/rich-text';
 import { ListNode, ListItemNode } from '@lexical/list';
+import { LinkNode } from '@lexical/link';
 import theme from './editor-theme';
 
 function onError(error: Error): void {
@@ -11,7 +12,7 @@ const editorConfig = {
   namespace: 'Scribe',
   theme,
   onError,
-  nodes: [HeadingNode, ListNode, ListItemNode],
+  nodes: [HeadingNode, ListNode, ListItemNode, LinkNode],
   movable: true,
 };
 

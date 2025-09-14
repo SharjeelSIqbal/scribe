@@ -3,8 +3,9 @@ import {
   INSERT_ORDERED_LIST_COMMAND,
   INSERT_CHECK_LIST_COMMAND,
 } from '@lexical/list';
+import { TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Bold,
   Italic,
@@ -93,6 +94,15 @@ export default function EditorToolbar() {
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
   const [align, setAlign] = useState<ElementFormatType | string>(LEFT);
+  const [showLinkInput, setShowLinkInput] = useState(false);
+  const [linkUrl, setLinkUrl] = useState('');
+  const linkInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (showLinkInput && linkInputRef.current) {
+      linkInputRef.current.focus();
+    }
+  }, [showLinkInput]);
 
   useEffect(() => {
     const toolbarCommands = registerToolbarCommands(editor, { setAlign, setCanUndo, setCanRedo });
@@ -101,7 +111,7 @@ export default function EditorToolbar() {
   }, [editor]);
 
   return (
-    <div className="flex items-center flex-wrap gap-3 p-3 border-b border-base-300 bg-base-200">
+    <div className="flex items-center flex-wrap gap-1 p-3 border-b border-base-300 bg-base-200">
       <div className="flex gap-2">
         <button
           type="button"
@@ -149,13 +159,13 @@ export default function EditorToolbar() {
         >
           <Heading1 className="w-5 h-5" />
         </button>
-        <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52">
+        <ul className="dropdown-content toolbar-dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box">
           {HEADING_OPTIONS.map((heading, index) => (
             <li key={heading.level} tabIndex={index} className="flex-nowrap">
               <button
                 type="button"
                 onClick={() => setHeadingLevel(editor, heading.level)}
-                className={`flex items-center gap-2 sidebar-hover px-2 py-1 ${heading.className}`}
+                className={`flex items-center gap-2 sidebar-hover px-2 py-1 ${heading.className} rounded hover:bg-base-300`}
               >
                 {heading.icon}
                 {heading.label}
@@ -193,12 +203,13 @@ export default function EditorToolbar() {
           <ListTodo className="w-5 h-5" />
         </button>
       </div>
+
       <div className="divider divider-horizontal mx-1" />
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 relative">
         <button
           type="button"
-          onClick={(e) => e.preventDefault()}
+          onClick={() => setShowLinkInput(true)}
           className="sidebar-hover p-2 rounded button-hover"
           title={INSERT_LINK}
         >
@@ -206,46 +217,91 @@ export default function EditorToolbar() {
         </button>
         <button
           type="button"
-          onClick={(e) => e.preventDefault()}
+          onClick={() => editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)}
           className="sidebar-hover p-2 rounded button-hover"
           title={REMOVE_LINK}
         >
           <Link2Off className="w-5 h-5" />
         </button>
-        <div className="divider divider-horizontal mx-1" />
-        <div className="dropdown dropdown-hover button-hover">
-          <button
-            type="button"
-            className="btn btn-sm btn-ghost p-2"
-            tabIndex={0}
-            aria-haspopup="true"
-            aria-expanded="false"
-            aria-label={ALIGNMENT_OPTIONS_LABEL}
-            onClick={(e) => e.preventDefault()}
-          >
-            {ALIGN_OPTIONS.find((opt) => opt.value === align)?.icon ?? (
-              <AlignLeft className="w-5 h-5" />
-            )}
-          </button>
-          <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-40">
-            {ALIGN_OPTIONS.map((option, index) => (
-              <li key={option.value} tabIndex={index}>
-                <button
-                  type="button"
-                  onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, option.value)}
-                  className={`flex items-center gap-2 sidebar-hover px-2 py-1 ${
-                    align === option.value ? 'bg-base-300 rounded' : ''
-                  }`}
-                >
-                  {option.icon}
-                  {option.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="divider divider-horizontal mx-1" />
+        {showLinkInput && (
+          <div className="absolute top-15 left-1/2 -translate-x-1/2 bg-base-200 p-3 rounded shadow-lg z-50 w-64">
+            <label className="block text-sm font-medium mb-1" htmlFor="link-input">
+              Enter link
+              <input
+                ref={linkInputRef}
+                type="text"
+                id="link-input"
+                value={linkUrl}
+                onChange={(e) => setLinkUrl(e.target.value)}
+                placeholder="https://example.com"
+                className="input input-sm input-bordered w-full mb-2 rounded"
+              />
+            </label>
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                className="btn btn-xs rounded button-no-color-hover"
+                onClick={() => {
+                  setShowLinkInput(false);
+                  setLinkUrl('');
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-xs btn-primary rounded"
+                onClick={() => {
+                  if (linkUrl) {
+                    editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
+                  }
+                  setShowLinkInput(false);
+                  setLinkUrl('');
+                }}
+              >
+                Insert
+              </button>
+            </div>
+          </div>
+        )}
       </div>
+
+      <div className="divider divider-horizontal mx-1" />
+
+      <div className="dropdown dropdown-hover button-hover">
+        <button
+          type="button"
+          className="btn btn-sm btn-ghost p-2"
+          tabIndex={0}
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-label={ALIGNMENT_OPTIONS_LABEL}
+          onClick={(e) => e.preventDefault()}
+        >
+          {ALIGN_OPTIONS.find((opt) => opt.value === align)?.icon ?? (
+            <AlignLeft className="w-5 h-5" />
+          )}
+        </button>
+        <ul className="dropdown-content toolbar-dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-40">
+          {ALIGN_OPTIONS.map((option, index) => (
+            <li key={option.value} tabIndex={index}>
+              <button
+                type="button"
+                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, option.value)}
+                className={`flex items-center gap-2 sidebar-hover px-2 py-1 rounded hover:bg-base-300 ${
+                  align === option.value ? 'bg-base-300 rounded active' : ''
+                }`}
+              >
+                {option.icon}
+                {option.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="divider divider-horizontal mx-1" />
+
       <div className="flex gap-2 ml-auto">
         <button
           type="button"

@@ -37,6 +37,8 @@ const theme = {
     listitem: 'my-1 marker:text-base-content marker:opacity-70',
     nested: { list: 'pl-6', listitem: 'my-1' },
   },
+
+  link: 'text-primary underline cursor-pointer hover:opacity-80',
 };
 
 export default theme;
