@@ -38,6 +38,12 @@
   left: 0;
 }
 
+.hovered .toolbar-dropdown-content:hover,
+.hovered .toolbar-dropdown-content {
+  opacity: 1;
+  display: block;
+}
+
 .toolbar-dropdown-content:hover .active {
   @apply bg-transparent text-nowrap w-[initial];
 }

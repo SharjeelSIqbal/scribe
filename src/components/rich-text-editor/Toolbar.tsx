@@ -60,6 +60,7 @@ import {
   STRIKETHROUGH_VALUE,
 } from '../../libs/constants';
 import registerToolbarCommands from '../../editor/registerCommands';
+import ToolbarDropdown from '../layout/ToolbarDropdown';
 
 function setHeadingLevel(editor: LexicalEditor, level: 0 | 1 | 2 | 3 | 4 | 5 | 6): void {
   editor.update(() => {
@@ -112,6 +113,7 @@ export default function EditorToolbar() {
 
   return (
     <div className="flex items-center flex-wrap gap-1 p-3 border-b border-base-300 bg-base-200">
+      {/** --- Text Formatting --- * */}
       <div className="flex gap-2">
         <button
           type="button"
@@ -146,8 +148,7 @@ export default function EditorToolbar() {
           <Strikethrough className="w-5 h-5" />
         </button>
       </div>
-
-      <div className="dropdown dropdown-hover button-hover">
+      <ToolbarDropdown>
         <button
           type="button"
           className="btn btn-sm btn-ghost p-2"
@@ -165,7 +166,7 @@ export default function EditorToolbar() {
               <button
                 type="button"
                 onClick={() => setHeadingLevel(editor, heading.level)}
-                className={`flex items-center gap-2 sidebar-hover px-2 py-1 ${heading.className} rounded hover:bg-base-300`}
+                className={`flex items-center gap-2 sidebar-hover px-2 py-1 ${heading.className} rounded hover:bg-base-300 text-nowrap`}
               >
                 {heading.icon}
                 {heading.label}
@@ -173,10 +174,9 @@ export default function EditorToolbar() {
             </li>
           ))}
         </ul>
-      </div>
-
-      <div className="divider divider-horizontal mx-0" />
-
+      </ToolbarDropdown>
+      {/** --- Lists --- * */}
+      <div className="divider divider-horizontal mx-1" />
       <div className="flex gap-2">
         <button
           type="button"
@@ -203,9 +203,8 @@ export default function EditorToolbar() {
           <ListTodo className="w-5 h-5" />
         </button>
       </div>
-
+      {/** --- Link --- * */}
       <div className="divider divider-horizontal mx-1" />
-
       <div className="flex gap-2 relative">
         <button
           type="button"
@@ -265,10 +264,9 @@ export default function EditorToolbar() {
           </div>
         )}
       </div>
-
+      {/** --- Dropdown --- * */}
       <div className="divider divider-horizontal mx-1" />
-
-      <div className="dropdown dropdown-hover button-hover">
+      <ToolbarDropdown>
         <button
           type="button"
           className="btn btn-sm btn-ghost p-2"
@@ -298,10 +296,9 @@ export default function EditorToolbar() {
             </li>
           ))}
         </ul>
-      </div>
-
+      </ToolbarDropdown>
+      {/** --- Undo/Redo --- * */}
       <div className="divider divider-horizontal mx-1" />
-
       <div className="flex gap-2 ml-auto">
         <button
           type="button"
