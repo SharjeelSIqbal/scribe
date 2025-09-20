@@ -7,29 +7,12 @@ import { CheckListPlugin } from '@lexical/react/LexicalCheckListPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { useCallback, useRef, useState } from 'react';
 import { EditorState } from 'lexical';
-import { MyOnChangePluginProps } from './LexicalProps';
 import Toolbar from './Toolbar';
 import { PLACEHOLDER_TEXT } from '../../libs/constants';
 import editorConfig from '../../libs/editor-config';
-
-function MyOnChangePlugin({ onChange, editableRef }: MyOnChangePluginProps) {
-  const [editor] = useLexicalComposerContext();
-  useEffect(() => {
-    return editor.registerUpdateListener(({ editorState }) => {
-      onChange(editorState);
-
-      const el = editableRef.current;
-      if (el) {
-        el.style.height = 'auto';
-        el.style.height = `${el.scrollHeight}px`;
-      }
-    });
-  }, [editor, onChange, editableRef]);
-  return null;
-}
+import OnChangePlugin from '../../lexical-custom-plugins/OnChangePlugin';
 
 export default function Editor(): JSX.Element {
   const [, setEditorState] = useState<EditorState>();
@@ -61,7 +44,7 @@ export default function Editor(): JSX.Element {
           ErrorBoundary={LexicalErrorBoundary}
         />
       </div>
-      <MyOnChangePlugin onChange={handleEditorChange} editableRef={editableRef} />
+      <OnChangePlugin onChange={handleEditorChange} editableRef={editableRef} />
       <HistoryPlugin />
       <ListPlugin />
       <CheckListPlugin />
