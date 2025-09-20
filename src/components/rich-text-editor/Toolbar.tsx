@@ -3,7 +3,7 @@ import {
   INSERT_ORDERED_LIST_COMMAND,
   INSERT_CHECK_LIST_COMMAND,
 } from '@lexical/list';
-import { TOGGLE_LINK_COMMAND } from '@lexical/link';
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -62,6 +62,14 @@ import {
 import registerToolbarCommands from '../../editor/registerCommands';
 import ToolbarDropdown from '../layout/ToolbarDropdown';
 
+/**
+ * @date 9/20/2025, 9:18:12 AM
+ * @description Sets the heading level of the selected text.
+ * @author siqbal
+ * @param {string} editor:LexicalEditor
+ * @param {string} level:0|1|2|3|4|5|6
+ * @return {void}
+ */
 function setHeadingLevel(editor: LexicalEditor, level: 0 | 1 | 2 | 3 | 4 | 5 | 6): void {
   editor.update(() => {
     const selection = $getSelection();
@@ -110,6 +118,56 @@ export default function EditorToolbar() {
 
     return toolbarCommands;
   }, [editor]);
+
+  /**
+   * @date 9/20/2025, 9:17:57 AM
+   * @description Handles showing the link input field in the link insert toolbar command.
+   * @author siqbal
+   * @return {void}
+   */
+  const handleShowLinkInput = () => {
+    editor.getEditorState().read(() => {
+      const selection = $getSelection();
+
+      if ($isRangeSelection(selection)) {
+        const node = selection.anchor.getNode();
+        const parent = node.getParent();
+
+        let linkNode = null;
+
+        if ($isLinkNode(node)) {
+          linkNode = node;
+        } else if (parent && $isLinkNode(parent)) {
+          linkNode = parent;
+        }
+
+        if (linkNode) {
+          setLinkUrl(linkNode.getURL());
+        } else {
+          setLinkUrl('');
+        }
+      }
+    });
+
+    setShowLinkInput(true);
+  };
+
+  /**
+   * @date 9/20/2025, 9:02:33 AM
+   * @description Handles submitting of anchor links in the link insert toolbar command.
+   * @author siqbal
+   * @param {any} e:React.FormEvent<HTMLFormElement>
+   * @return {void}
+   */
+
+  const handleLinkSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (linkUrl) {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
+    }
+    setShowLinkInput(false);
+    setLinkUrl('');
+  };
 
   return (
     <div className="flex items-center flex-wrap gap-1 p-3 border-b border-base-300 bg-base-200">
@@ -208,7 +266,7 @@ export default function EditorToolbar() {
       <div className="flex gap-2 relative">
         <button
           type="button"
-          onClick={() => setShowLinkInput(true)}
+          onClick={handleShowLinkInput}
           className="sidebar-hover p-2 rounded button-hover"
           title={INSERT_LINK}
         >
@@ -223,45 +281,37 @@ export default function EditorToolbar() {
           <Link2Off className="w-5 h-5" />
         </button>
         {showLinkInput && (
-          <div className="absolute top-15 left-1/2 -translate-x-1/2 bg-base-200 p-3 rounded shadow-lg z-50 w-64">
-            <label className="block text-sm font-medium mb-1" htmlFor="link-input">
-              Enter link
-              <input
-                ref={linkInputRef}
-                type="text"
-                id="link-input"
-                value={linkUrl}
-                onChange={(e) => setLinkUrl(e.target.value)}
-                placeholder="https://example.com"
-                className="input input-sm input-bordered w-full mb-2 rounded"
-              />
-            </label>
-            <div className="flex justify-end gap-2">
-              <button
-                type="button"
-                className="btn btn-xs rounded button-no-color-hover"
-                onClick={() => {
-                  setShowLinkInput(false);
-                  setLinkUrl('');
-                }}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="btn btn-xs btn-primary rounded"
-                onClick={() => {
-                  if (linkUrl) {
-                    editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
-                  }
-                  setShowLinkInput(false);
-                  setLinkUrl('');
-                }}
-              >
-                Insert
-              </button>
+          <form onSubmit={handleLinkSubmit}>
+            <div className="absolute top-15 left-1/2 -translate-x-1/2 bg-base-200 p-3 rounded shadow-lg z-50 w-64">
+              <label className="block text-sm font-medium mb-1" htmlFor="link-input">
+                Enter link
+                <input
+                  ref={linkInputRef}
+                  type="text"
+                  id="link-input"
+                  value={linkUrl}
+                  onChange={(e) => setLinkUrl(e.target.value)}
+                  placeholder="https://example.com"
+                  className="input input-sm input-bordered w-full mb-2 rounded"
+                />
+              </label>
+              <div className="flex justify-end gap-2">
+                <button
+                  type="button"
+                  className="btn btn-xs rounded button-no-color-hover"
+                  onClick={() => {
+                    setShowLinkInput(false);
+                    setLinkUrl('');
+                  }}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-xs btn-primary rounded">
+                  Insert
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
         )}
       </div>
       {/** --- Dropdown --- * */}
@@ -284,8 +334,8 @@ export default function EditorToolbar() {
           {ALIGN_OPTIONS.map((option, index) => (
             <li key={option.value} tabIndex={index}>
               <button
-                type="button"
-                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, option.value)}
+                type="submit"
+                onSubmit={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, option.value)}
                 className={`flex items-center gap-2 sidebar-hover px-2 py-1 rounded hover:bg-base-300 ${
                   align === option.value ? 'bg-base-300 rounded active' : ''
                 }`}
