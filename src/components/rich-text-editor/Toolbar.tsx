@@ -209,7 +209,7 @@ export default function EditorToolbar() {
       <ToolbarDropdown>
         <button
           type="button"
-          className="btn btn-sm btn-ghost p-2"
+          className="btn btn-sm btn-ghost p-2 button-hover"
           tabIndex={0}
           aria-haspopup="true"
           aria-expanded="false"
@@ -319,7 +319,7 @@ export default function EditorToolbar() {
       <ToolbarDropdown>
         <button
           type="button"
-          className="btn btn-sm btn-ghost p-2"
+          className="btn btn-sm btn-ghost p-2 button-hover"
           tabIndex={0}
           aria-haspopup="true"
           aria-expanded="false"

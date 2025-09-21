@@ -20,6 +20,11 @@
     inset 0 -1px oklch(100% 0 0 / 0.01);
 }
 
+.btn.button-hover {
+  background-color: transparent;
+  border: none;
+}
+
 @media (forced-colors: active) {
   .button-hover:hover {
     outline: 2px solid transparent;
@@ -27,6 +32,8 @@
   }
 }
 
+// Dropdown
+.dropdown > button:hover
 .dropdown > button {
   background-image: none;
   background-color: transparent;
@@ -50,4 +57,16 @@
 
 .toolbar-dropdown-content .active:hover {
   @apply bg-base-300;
+}
+
+.dropdown-content,
+.toolbar-dropdown-content {
+  border: 2px solid var(--color-neutral);
+}
+
+.user-role-dropdown-menu .dropdown-content {
+  width: initial;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9;
 }

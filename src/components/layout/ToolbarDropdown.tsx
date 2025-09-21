@@ -22,7 +22,7 @@ function ToolbarDropdown({ children }: ToolbarDropdownProps) {
     timeoutRef.current = setTimeout(() => {
       timeoutRef.current = null;
       setIsHovered(false);
-    }, 1000);
+    }, 250);
   };
 
   return (

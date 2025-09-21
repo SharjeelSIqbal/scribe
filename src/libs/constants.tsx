@@ -10,8 +10,10 @@ import {
   Heading5,
   Heading6,
   Pilcrow,
+  Eye,
+  Edit3,
 } from 'lucide-react';
-import { HeadingOption, AlignOption, HeadingTag } from '../types/types';
+import { HeadingOption, AlignOption, HeadingTag, UserRolesOptions } from '../types/types';
 
 const APP_NAME = 'Scribe';
 const SOME_PLACE_HODLER = 'Some Place Holder';
@@ -35,6 +37,7 @@ const H6 = 'h6';
 
 const HEADING_OPTIONS_LABEL = 'Heading Options';
 const ALIGNMENT_OPTIONS_LABEL = 'Alignment Options';
+const USER_ROLE_OPTIONS_LABEL = 'User Role Options';
 
 const BOLD_LABEL = 'Bold';
 const ITALIC_LABEL = 'Italic';
@@ -143,11 +146,31 @@ const ALIGN_OPTIONS: AlignOption[] = [
   },
 ];
 
+const USER_ROLES_OPTIONS: UserRolesOptions = [
+  {
+    value: 'editor',
+    label: 'Editor',
+    icon: <Edit3 className="w-4 h-4" />,
+  },
+  {
+    value: 'viewer',
+    label: 'Viewer',
+    icon: <Eye className="w-4 h-4" />,
+  },
+  // Not an option yet
+  // {
+  //   value: 'presenter',
+  //   label: 'presenter',
+  //   icon: <Play className="w-4 h-4" />,
+  // },
+];
+
 export {
   APP_NAME,
   SOME_PLACE_HODLER,
   DEBOUNCE_DELAY,
   ALIGN_OPTIONS,
+  USER_ROLE_OPTIONS_LABEL,
   HEADING_OPTIONS,
   HEADING_OPTIONS_LABEL,
   BOLD_LABEL,
@@ -183,4 +206,5 @@ export {
   H6,
   PARAGRAPH,
   PLACEHOLDER_TEXT,
+  USER_ROLES_OPTIONS,
 };
