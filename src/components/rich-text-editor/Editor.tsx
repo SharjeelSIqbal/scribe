@@ -13,6 +13,7 @@ import Toolbar from './Toolbar';
 import { PLACEHOLDER_TEXT } from '../../libs/constants';
 import editorConfig from '../../libs/editor-config';
 import OnChangePlugin from '../../lexical-custom-plugins/OnChangePlugin';
+import EditorEditableToggle from '../../lexical-custom-plugins/EditorEditableToggle';
 
 export default function Editor(): JSX.Element {
   const [, setEditorState] = useState<EditorState>();
@@ -25,6 +26,7 @@ export default function Editor(): JSX.Element {
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <Toolbar />
+      <EditorEditableToggle />
       <div className="relative py-1">
         <RichTextPlugin
           contentEditable={

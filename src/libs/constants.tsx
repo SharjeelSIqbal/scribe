@@ -18,6 +18,10 @@ import { HeadingOption, AlignOption, HeadingTag, UserRolesOptions } from '../typ
 const APP_NAME = 'Scribe';
 const SOME_PLACE_HODLER = 'Some Place Holder';
 const DEBOUNCE_DELAY = 500;
+const USER_ROLE_EDITOR = 'editor';
+const USER_ROLE_VIEWER = 'viewer';
+const USER_ROLE_EDITOR_LABEL = 'Editor';
+const USER_ROLE_VIEWER_LABEL = 'Viewer';
 
 // Toolbar Constants
 const HEADING_1 = 'Heading 1';
@@ -148,13 +152,13 @@ const ALIGN_OPTIONS: AlignOption[] = [
 
 const USER_ROLES_OPTIONS: UserRolesOptions = [
   {
-    value: 'editor',
-    label: 'Editor',
+    value: USER_ROLE_EDITOR,
+    label: USER_ROLE_EDITOR_LABEL,
     icon: <Edit3 className="w-4 h-4" />,
   },
   {
-    value: 'viewer',
-    label: 'Viewer',
+    value: USER_ROLE_VIEWER,
+    label: USER_ROLE_VIEWER_LABEL,
     icon: <Eye className="w-4 h-4" />,
   },
   // Not an option yet
@@ -207,4 +211,8 @@ export {
   PARAGRAPH,
   PLACEHOLDER_TEXT,
   USER_ROLES_OPTIONS,
+  USER_ROLE_EDITOR,
+  USER_ROLE_VIEWER,
+  USER_ROLE_EDITOR_LABEL,
+  USER_ROLE_VIEWER_LABEL,
 };
