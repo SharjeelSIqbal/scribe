@@ -33,6 +33,19 @@
   @apply bg-transparent outline-none;
 }
 
+.title-input {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.title-no-margin {
+  margin-bottom: 0;
+}
+
+.title-min-height {
+  min-height: 3rem;
+}
+
 /* e.g. in your global.css */
 /* robust utilities, only if needed */
 .lex-underline {

@@ -10,14 +10,16 @@ import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { useCallback, useRef, useState } from 'react';
 import { EditorState } from 'lexical';
 import Toolbar from './Toolbar';
-import { PLACEHOLDER_TEXT } from '../../libs/constants';
+import { PLACEHOLDER_TEXT, USER_ROLE_EDITOR } from '../../libs/constants';
 import editorConfig from '../../libs/editor-config';
 import OnChangePlugin from '../../lexical-custom-plugins/OnChangePlugin';
 import EditorEditableToggle from '../../lexical-custom-plugins/EditorEditableToggle';
+import { useUserRole } from '../../contexts/UserRoleContext';
 
 export default function Editor(): JSX.Element {
   const [, setEditorState] = useState<EditorState>();
   const editableRef = useRef<HTMLDivElement | null>(null);
+  const { userRole } = useUserRole();
 
   const handleEditorChange = useCallback((editorState: EditorState) => {
     setEditorState(editorState);
@@ -40,7 +42,7 @@ export default function Editor(): JSX.Element {
               aria-placeholder={PLACEHOLDER_TEXT}
               className="placeholder text-secondary-content absolute top-0 left-0 z-0 py-1"
             >
-              {PLACEHOLDER_TEXT}
+              {userRole === USER_ROLE_EDITOR ? PLACEHOLDER_TEXT : ''}
             </div>
           }
           ErrorBoundary={LexicalErrorBoundary}
