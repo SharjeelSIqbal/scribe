@@ -28,6 +28,11 @@
   @apply text-base leading-relaxed;
 }
 
+.contentEditable &:focus,
+.contentEditable &:focus-within {
+  @apply bg-transparent outline-none;
+}
+
 /* e.g. in your global.css */
 /* robust utilities, only if needed */
 .lex-underline {

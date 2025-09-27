@@ -32,7 +32,7 @@ export default function Editor(): JSX.Element {
           contentEditable={
             <ContentEditable
               ref={editableRef}
-              className="contentEditable textarea-ghost h-full resize-none w-full focus:outline-none focus:bg-transparent relative z-10"
+              className="contentEditable textarea-ghost h-full resize-none w-full focus:outline-none focus:bg-transparent focus-within:bg-transparent relative z-10"
             />
           }
           placeholder={

@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import userRoles from '../libs/user-roles.json';
+import { USER_ROLE_EDITOR } from '../libs/constants';
 
 interface UserRoleContextValue {
   userRole: (typeof userRoles)[number];
@@ -21,7 +22,7 @@ const UserRoleProvider = createContext<UserRoleContextValue | undefined>(undefin
  */
 export function UserRoleProviderComponent({
   children,
-  defaultUserRole = 'viewer',
+  defaultUserRole = USER_ROLE_EDITOR,
 }: {
   children: ReactNode;
   defaultUserRole?: (typeof userRoles)[number];

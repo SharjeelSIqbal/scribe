@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -69,6 +69,22 @@ app.on('window-all-closed', () => {
     app.quit();
     win = null;
   }
+});
+
+app.on('web-contents-created', (_, contents) => {
+  contents.setWindowOpenHandler(({ url }) => {
+    // open new windows/targets externally
+    shell.openExternal(url);
+    return { action: 'deny' };
+  });
+
+  contents.on('will-navigate', (event, url) => {
+    const currentUrl = contents.getURL();
+    if (url !== currentUrl) {
+      event.preventDefault();
+      shell.openExternal(url);
+    }
+  });
 });
 
 app.on('activate', () => {
