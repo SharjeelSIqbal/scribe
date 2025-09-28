@@ -1,4 +1,5 @@
 import { ipcRenderer, contextBridge } from 'electron';
+import { SAVE_NOTE } from './ipc/ipc-constants';
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {
@@ -18,6 +19,10 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     const [channel, ...omit] = args;
     return ipcRenderer.invoke(channel, ...omit);
   },
-  // You can expose other APTs you need here.
+  saveFile(notesName: string, content: string) {
+    return ipcRenderer.invoke(SAVE_NOTE, { notesName, content });
+  },
+
+  // Expose other APIs you need here.
   // ...
 });
