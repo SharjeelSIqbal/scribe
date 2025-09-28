@@ -6,11 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
-    "lint": "eslint 'src/**/*' --ext ts,tsx --report-unused-disable-directives  --max-warnings 0",
+    "build:mac": "tsc && vite build && electron-builder --mac --arm64",
+    "build:windows": "tsc && vite build && electron-builder --win --x64",
+    "build:linux": "tsc && vite build && electron-builder --linux --x64",
+    "lint": "npm run format && eslint 'src/**/*' --ext ts,tsx --report-unused-disable-directives  --max-warnings 0 && npm run lint:node",
+    "lint:node": "eslint 'electron/' --ext ts --report-unused-disable-directives  --max-warnings 0",
     "preview": "vite preview",
-    "format": "prettier --write \"src/**/*.{js,ts,jsx,tsx,css,md,json}\"",
-    "format:check": "prettier --check \"src/**/*.{js,ts,jsx,tsx,css,md,json}\"",
-    "prepare": "husky"
+    "format": "prettier . --write",
+    "format:check": "prettier --check \"src/**/*.{js,ts,jsx,tsx,css,md,json}\" && prettier --check \"electron/**/*.{js,ts,jsx,tsx,css,md,json}\"",
+    "prepare": "husky",
+    "transpile": "tsc --project ./tsconfig.json"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,css,md,json}": [
@@ -19,19 +24,32 @@
     ]
   },
   "dependencies": {
+    "@lexical/history": "^0.33.1",
+    "@lexical/link": "^0.33.1",
+    "@lexical/list": "^0.33.1",
+    "@lexical/react": "^0.33.1",
+    "@lexical/rich-text": "^0.33.1",
+    "@lexical/selection": "^0.33.1",
     "@tailwindcss/vite": "^4.1.11",
+    "dayjs": "^1.11.13",
+    "framer-motion": "^12.23.11",
+    "lexical": "^0.33.1",
+    "lucide-react": "^0.532.0",
+    "os-utils": "^0.0.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
+    "@types/os-utils": "^0.0.4",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@vitejs/plugin-react": "^4.2.1",
     "daisyui": "^5.0.46",
-    "electron": "^30.0.1",
+    "electron": "^30.5.1",
     "electron-builder": "^24.13.3",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",

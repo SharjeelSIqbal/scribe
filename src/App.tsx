@@ -1,10 +1,11 @@
-import ThemeDropDown from './components/theme/ThemeDropDown';
+import Notes from './components/notes/Notes';
+import Sidebar from './components/layout/Sidebar';
 
 function App() {
   return (
-    <main>
-      <h1>Hello World!</h1>
-      <ThemeDropDown />
+    <main className="h-full w-full bg-neutral flex drawer-content">
+      <Sidebar />
+      <Notes />
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
 import themes from '../libs/themes.json';
 
 type Theme = (typeof themes)[number];
@@ -21,8 +21,11 @@ export function ThemeProvider({
   defaultTheme?: Theme;
 }): JSX.Element {
   const [theme, setTheme] = useState<Theme>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY) as Theme | null;
-    return saved ?? defaultTheme;
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY) as Theme | null;
+      return saved ?? defaultTheme;
+    }
+    return defaultTheme;
   });
 
   useEffect(() => {
