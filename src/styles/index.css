@@ -1,9 +1,9 @@
 @import 'tailwindcss';
 @plugin "daisyui";
-@import './typography/font-families.css';
 @import './components/inputs.css';
 @import './components/button.css';
 @import './typography/text.css';
+@import './typography/font-families.css';
 @import './typography/lists.css';
 @import './typography/checklist.css';
 
