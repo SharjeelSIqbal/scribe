@@ -19,7 +19,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     const [channel, ...omit] = args;
     return ipcRenderer.invoke(channel, ...omit);
   },
-  saveFile(notesName: string, content: string) {
+  saveNote(notesName: string, content: string) {
     return ipcRenderer.invoke(SAVE_NOTE, { notesName, content });
   },
 

@@ -15,15 +15,26 @@ import editorConfig from '../../libs/editor-config';
 import OnChangePlugin from '../../lexical-custom-plugins/OnChangePlugin';
 import EditorEditableToggle from '../../lexical-custom-plugins/EditorEditableToggle';
 import { useUserRole } from '../../contexts/UserRoleContext';
+import { SaveShortcutPlugin } from '../../lexical-custom-plugins/OnSavePlugin';
+import { SAVE_NOTE } from '../../../electron/ipc/ipc-constants';
 
 export default function Editor(): JSX.Element {
-  const [, setEditorState] = useState<EditorState>();
+  const [editor, setEditorState] = useState<EditorState>();
   const editableRef = useRef<HTMLDivElement | null>(null);
   const { userRole } = useUserRole();
 
   const handleEditorChange = useCallback((editorState: EditorState) => {
     setEditorState(editorState);
   }, []);
+
+  const handleEditorSave = useCallback(() => {
+    if (userRole !== USER_ROLE_EDITOR || !editor) return;
+
+    const content = editor.toJSON();
+    window.ipcRenderer.invoke(SAVE_NOTE, { notesName: 'Some title', content }).then((res) => {
+      console.log('Saved file to:', res.path);
+    });
+  }, [editor, userRole]);
 
   return (
     <LexicalComposer initialConfig={editorConfig}>
@@ -54,6 +65,7 @@ export default function Editor(): JSX.Element {
       <CheckListPlugin />
       <LinkPlugin />
       <TabIndentationPlugin />
+      <SaveShortcutPlugin onSave={handleEditorSave} />
     </LexicalComposer>
   );
 }

@@ -25,5 +25,12 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
   },
 
-  ignorePatterns: ['package.json', 'package-lock.json', '*.css', '*.json'],
+  ignorePatterns: [
+    'package.json',
+    'package-lock.json',
+    '*.css',
+    '*.json',
+    'scripts/**/*.js',
+    'src/styles/typography/fonts/**/*',
+  ],
 };

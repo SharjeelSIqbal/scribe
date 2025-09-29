@@ -1,10 +1,14 @@
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import pollingInterval from './utils/polling-interval';
-import { getDiagnostics } from './utils/resource-manager';
 import { screen } from 'electron';
+import fs from 'node:fs';
+import { NOTES_DIR, USER_DATA } from './constants';
+import electronLog from 'electron-log';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 createRequire(import.meta.url);
 const __dirnam = path.dirname(fileURLToPath(import.meta.url));
@@ -24,6 +28,9 @@ process.env.APP_ROOT = path.join(__dirnam, '..');
 export const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 export const MAIN_DIST = path.join(process.env.APP_ROOT, 'dist-electron');
 export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist');
+
+export const baseDir = app.getPath(USER_DATA);
+export const docsDir = path.join(baseDir, NOTES_DIR);
 
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
   ? path.join(process.env.APP_ROOT, 'public')
@@ -64,27 +71,12 @@ function createWindow() {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
     win = null;
   }
-});
-
-app.on('web-contents-created', (_, contents) => {
-  contents.setWindowOpenHandler(({ url }) => {
-    // open new windows/targets externally
-    shell.openExternal(url);
-    return { action: 'deny' };
-  });
-
-  contents.on('will-navigate', (event, url) => {
-    const currentUrl = contents.getURL();
-    if (url !== currentUrl) {
-      event.preventDefault();
-      shell.openExternal(url);
-    }
-  });
 });
 
 app.on('activate', () => {
@@ -95,8 +87,15 @@ app.on('activate', () => {
   }
 });
 
-app.on('ready', function () {
-  pollingInterval(getDiagnostics);
-});
-
-app.whenReady().then(createWindow);
+app
+  .whenReady()
+  .then(() => {
+    if (!fs.existsSync(docsDir)) {
+      fs.mkdirSync(docsDir, { recursive: true });
+      electronLog.info('Created notes directory at:', docsDir);
+      console.log('Log file testing:', electronLog.transports.file.getFile().path);
+    } else {
+      electronLog.debug('Directory already exists or is ignored testing:', docsDir);
+    }
+  })
+  .then(createWindow);

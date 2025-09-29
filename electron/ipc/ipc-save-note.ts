@@ -8,15 +8,11 @@ const path = require('path');
 const baseDir = app.getPath(USER_DATA);
 const docsDir = path.join(baseDir, NOTES_DIR);
 
-// Ensure notes directory exists
-if (!fs.existsSync(docsDir)) {
-  fs.mkdirSync(docsDir, { recursive: true });
-}
-
 // Save file
 ipcMain.handle(
   SAVE_NOTE,
   async (__: unknown, { notesName, content }: { notesName: string; content: string }) => {
+    console.log(__, notesName, content, 'Saving note...');
     const filePath = path.join(docsDir, `${notesName}${LEXICAL_JSON}`);
 
     fs.writeFileSync(filePath, JSON.stringify(content, null, 2), UTF_8);

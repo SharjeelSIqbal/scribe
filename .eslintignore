@@ -9,3 +9,4 @@ vite.config.ts
 release
 dist
 **/*.md
+scripts/**/*/.js

@@ -24,3 +24,10 @@ release
 *.njsproj
 *.sln
 *.sw?
+
+
+# Scripts
+tail-logs.sh
+
+.env
+.env.local
