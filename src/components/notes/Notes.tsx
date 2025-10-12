@@ -19,7 +19,6 @@ function Notes(): JSX.Element {
   };
 
   const handleExampleIpcRendererFunctionCall = async () => {
-    console.log(editor.getEditorState().toJSON());
     const editorJsonContent = editor.getEditorState().toJSON();
     const date: string = Date.now().toString();
     const id: string = `id-${date}`;
@@ -30,8 +29,7 @@ function Notes(): JSX.Element {
       body: { content: editorJsonContent },
     } as Note;
 
-    const response = await window.notes.saveNote(notesBody);
-    alert(JSON.stringify(response, null, 2));
+    await window.notes.saveNote(notesBody);
   };
 
   return (
