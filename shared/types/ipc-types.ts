@@ -1,6 +1,6 @@
-type SaveNote = {
-  notesName: string;
+type Note = {
+  title: string;
   body: { content: string };
 };
 
-export type { SaveNote };
+export type { Note };

@@ -1,5 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 import { USER_ROLE_EDITOR, USER_ROLE_VIEWER } from '@src/libs/constants';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { Note } from '@shared/types/ipc-types';
 import NoteContainer from './NoteContainer';
 import Editor from '../rich-text-editor/Editor';
 import UserRoleDropdown from '../rich-text-editor/UserRoleDropdown';
@@ -10,23 +12,22 @@ const PLACEHOLDER_TEXT_TITLE = 'Title';
 function Notes(): JSX.Element {
   const [title, setTitle] = useState<string>('');
   const { userRole } = useUserRole();
+  const [editor] = useLexicalComposerContext();
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
   const handleExampleIpcRendererFunctionCall = async () => {
-    // Call the example method exposed in preload.ts
+    console.log(editor.toJSON());
     const notesBody = {
-      noteTitle: 'Example Note',
+      title: 'Example Note',
       body: { content: 'This is an example note content.' },
-    };
+    } as Note;
 
     console.log(notesBody);
 
-    const response = await window.notes.saveNote('Example Note', {
-      content: 'This is an example note content.',
-    });
+    const response = await window.notes.saveNote(notesBody);
     console.log('Got this back from main:', response);
     alert(JSON.stringify(response, null, 2));
   };
