@@ -1,5 +1,7 @@
 {
+  "files": [],
   "compilerOptions": {
+
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
@@ -18,8 +20,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+    "@shared/*": ["shared/*"],
+    "@electron/*": ["electron/*"]
+    },
   },
-  "include": ["src", "electron"],
-  "references": [{ "path": "./electron/tsconfig.json" }]
+  "include": ["src", "electron", "shared/types.ts"],
+  "references": [
+    { "path": "./electron" },
+    { "path": "./shared" }
+  ]
 }

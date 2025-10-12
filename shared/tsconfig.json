@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "../dist/shared",
+    "rootDir": ".",
+    "module": "ESNext",
+    "target": "ESNext",
+    "strict": true
+  },
+  "include": ["**/*.ts"]
+}
