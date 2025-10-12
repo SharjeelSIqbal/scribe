@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 import { USER_ROLE_EDITOR, USER_ROLE_VIEWER } from '@src/libs/constants';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { Note } from '@shared/types/ipc-types';
+import { Note } from '@shared/types/types';
 import NoteContainer from './NoteContainer';
 import Editor from '../rich-text-editor/Editor';
 import UserRoleDropdown from '../rich-text-editor/UserRoleDropdown';
@@ -19,16 +19,18 @@ function Notes(): JSX.Element {
   };
 
   const handleExampleIpcRendererFunctionCall = async () => {
-    console.log(editor.toJSON());
+    console.log(editor.getEditorState().toJSON());
+    const editorJsonContent = editor.getEditorState().toJSON();
+    const date: string = Date.now().toString();
+    const id: string = `id-${date}`;
+    const noTitle = `newNote.${date}`;
     const notesBody = {
-      title: 'Example Note',
-      body: { content: 'This is an example note content.' },
+      id: `id-${id}`,
+      title: title || noTitle,
+      body: { content: editorJsonContent },
     } as Note;
 
-    console.log(notesBody);
-
     const response = await window.notes.saveNote(notesBody);
-    console.log('Got this back from main:', response);
     alert(JSON.stringify(response, null, 2));
   };
 
