@@ -38,7 +38,7 @@ export default function Editor(): JSX.Element {
   return (
     <div>
       <Toolbar />
-      <WordCountPlugin />
+      {userRole === USER_ROLE_EDITOR && <WordCountPlugin />}
       <EditorEditableToggle />
       <div className="relative py-1">
         <RichTextPlugin

@@ -24,7 +24,11 @@ function WordCountPlugin() {
     });
   }, [editor]);
 
-  return <div className="text-sm text-neutral-content">Word count: {wordCount}</div>;
+  return (
+    <div className="px-1 flex justify-end pt-1 text-sm text-primary-content/60 select-none">
+      Word count: {wordCount}
+    </div>
+  );
 }
 
 export default WordCountPlugin;
