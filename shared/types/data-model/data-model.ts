@@ -28,6 +28,8 @@ export interface Note {
   version: number;
   pinned?: boolean;
   archived?: boolean;
+  charCount?: number;
+  wordCount?: number;
 }
 
 export interface Tag {
