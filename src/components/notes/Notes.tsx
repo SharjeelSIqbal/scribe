@@ -34,7 +34,7 @@ function Notes(): JSX.Element {
 
   return (
     <NoteContainer>
-      <button type="button" onClick={handleExampleIpcRendererFunctionCall}>
+      <button type="button" onClick={() => handleExampleIpcRendererFunctionCall()}>
         Hit me{' '}
       </button>
       <div className="flex w-full flex-col lg:flex-col">
