@@ -46,6 +46,7 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, 'shared/'),
       '@electron': path.resolve(__dirname, 'electron/'),
       '@src/libs': path.resolve(__dirname, 'src/libs/'),
+      '@lexical-custom-plugins': path.resolve(__dirname, 'src/lexical-custom-plugins/'),
     },
   },
 });

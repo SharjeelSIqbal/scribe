@@ -25,7 +25,8 @@
     "paths": {
     "@shared/*": ["shared/*"],
     "@electron/*": ["electron/*"],
-    "@src/libs/*": ["src/libs/*"]
+    "@src/libs/*": ["src/libs/*"],
+    "@lexical-custom-plugins/*": ["src/lexical-custom-plugins/*"],
     },
   },
   "include": ["src", "electron", "shared/types/types.ts", "shared/lexical-types.ts", "shared/ipc-constants.ts", "src/types/global.d.ts"],

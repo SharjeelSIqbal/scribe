@@ -10,11 +10,12 @@ import { useCallback, useRef, useState } from 'react';
 import { EditorState } from 'lexical';
 import { PLACEHOLDER_TEXT, USER_ROLE_EDITOR } from '@src/libs/constants';
 import { SAVE_NOTE } from '@shared/constants/ipc-constants';
-import Toolbar from './Toolbar';
-import OnChangePlugin from '../../lexical-custom-plugins/OnChangePlugin';
-import EditorEditableToggle from '../../lexical-custom-plugins/EditorEditableToggle';
+import OnChangePlugin from '@lexical-custom-plugins/OnChangePlugin';
+import EditorEditableToggle from '@lexical-custom-plugins/EditorEditableToggle';
+import { SaveShortcutPlugin } from '@lexical-custom-plugins/OnSavePlugin';
+import WordCountPlugin from '@lexical-custom-plugins/WordCountPlugin';
 import { useUserRole } from '../../contexts/UserRoleContext';
-import { SaveShortcutPlugin } from '../../lexical-custom-plugins/OnSavePlugin';
+import Toolbar from './Toolbar';
 
 export default function Editor(): JSX.Element {
   const [editor, setEditorState] = useState<EditorState>();
@@ -37,6 +38,7 @@ export default function Editor(): JSX.Element {
   return (
     <div>
       <Toolbar />
+      <WordCountPlugin />
       <EditorEditableToggle />
       <div className="relative py-1">
         <RichTextPlugin
