@@ -15,8 +15,18 @@ function Notes(): JSX.Element {
     setTitle(e.target.value);
   };
 
+  const handleExampleIpcRendererFunctionCall = async () => {
+    // Call the example method exposed in preload.ts
+    const response = await window.example.exampleMethod();
+    console.log('Got this back from main:', response);
+    alert(JSON.stringify(response, null, 2));
+  };
+
   return (
     <NoteContainer>
+      <button type="button" onClick={handleExampleIpcRendererFunctionCall}>
+        Hit me{' '}
+      </button>
       <div className="flex w-full flex-col lg:flex-col">
         <div className="py-1.5 relative h-14 flex justify-between items-center">
           <div className="w-[90%] relative min-h-4 h-full flex items-center">

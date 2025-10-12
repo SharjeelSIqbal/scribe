@@ -26,3 +26,19 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   // Expose other APIs you need here.
   // ...
 });
+
+contextBridge.exposeInMainWorld('notes', {
+  saveNote: async (...args: Parameters<typeof ipcRenderer.on>) => {
+    console.log('Saving note from preload with args:', args);
+    return ipcRenderer.invoke(SAVE_NOTE, ...args);
+  },
+});
+
+contextBridge.exposeInMainWorld('example', {
+  exampleMethod: async () => {
+    console.log('Invoking examplechannel with:', 'Hello from preload');
+    const response = await ipcRenderer.invoke('examplechannel', 'Hello from preload');
+    console.log('Response from main:', response);
+    return response;
+  },
+});

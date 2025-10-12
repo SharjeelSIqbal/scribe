@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import { NOTES_DIR, USER_DATA } from './constants';
 import electronLog from 'electron-log';
 import dotenv from 'dotenv';
+import './ipc/ipc-example';
 
 dotenv.config();
 
