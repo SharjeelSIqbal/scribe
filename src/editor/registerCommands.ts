@@ -11,7 +11,7 @@ import {
   CAN_UNDO_COMMAND,
   CAN_REDO_COMMAND,
 } from 'lexical';
-import { LEFT } from '../libs/constants';
+import { LEFT } from '@src/libs/constants';
 
 function registerToolbarCommands(
   editor: LexicalEditor,

@@ -6,6 +6,13 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+   resolve: {
+    alias: {
+      '@shared': path.resolve(__dirname, 'shared/'),
+      '@electron': path.resolve(__dirname, 'electron/'),
+      '@src/libs': path.resolve(__dirname, 'src/libs/'),
+    },
+   },
   plugins: [
     tailwindcss(),
     react(),

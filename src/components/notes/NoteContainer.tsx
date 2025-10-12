@@ -1,4 +1,4 @@
-import ReactChildrenProp from '../../types/ReactChldrenProps';
+import ReactChildrenProp from '@src/libs/types/react-children-types';
 
 function NoteContainer({ children }: ReactChildrenProp): JSX.Element {
   return (

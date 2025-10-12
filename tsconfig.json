@@ -24,10 +24,11 @@
     "baseUrl": ".",
     "paths": {
     "@shared/*": ["shared/*"],
-    "@electron/*": ["electron/*"]
+    "@electron/*": ["electron/*"],
+    "@src/libs/*": ["src/libs/*"]
     },
   },
-  "include": ["src", "electron", "shared/types.ts"],
+  "include": ["src", "electron", "shared/types/types.ts", "shared/lexical-types.ts", "shared/ipc-constants.ts"],
   "references": [
     { "path": "./electron" },
     { "path": "./shared" }

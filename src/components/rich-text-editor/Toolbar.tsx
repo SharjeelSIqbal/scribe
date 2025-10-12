@@ -58,7 +58,7 @@ import {
   ITALIC_VALUE,
   UNDERLINE_VALUE,
   STRIKETHROUGH_VALUE,
-} from '../../libs/constants';
+} from '@src/libs/constants';
 import registerToolbarCommands from '../../editor/registerCommands';
 import ToolbarDropdown from '../layout/ToolbarDropdown';
 import { useUserRole } from '../../contexts/UserRoleContext';

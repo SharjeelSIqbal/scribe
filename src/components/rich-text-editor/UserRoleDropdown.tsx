@@ -1,6 +1,6 @@
 import { Edit3 } from 'lucide-react';
+import { USER_ROLE_OPTIONS_LABEL, USER_ROLES_OPTIONS } from '@src/libs/constants';
 import { useUserRole } from '../../contexts/UserRoleContext';
-import { USER_ROLE_OPTIONS_LABEL, USER_ROLES_OPTIONS } from '../../libs/constants';
 import ToolbarDropdown from '../layout/ToolbarDropdown';
 
 function UserRoleDropdown() {

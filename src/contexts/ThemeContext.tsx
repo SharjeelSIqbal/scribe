@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
-import themes from '../libs/themes.json';
+import themes from '@src/libs/themes.json';
 
 type Theme = (typeof themes)[number];
 interface ThemeContextValue {

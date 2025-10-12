@@ -1,5 +1,5 @@
 import { LEXICAL_JSON, NOTES_DIR, USER_DATA, UTF_8 } from '../constants';
-import { LIST_NOTES, SAVE_NOTE } from './ipc-constants';
+import { LIST_NOTES, SAVE_NOTE } from '@shared/constants/ipc-constants';
 
 const { app, ipcMain } = require('electron');
 const fs = require('fs');

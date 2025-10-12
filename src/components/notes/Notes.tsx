@@ -1,9 +1,9 @@
 import { useState, ChangeEvent } from 'react';
+import { USER_ROLE_EDITOR, USER_ROLE_VIEWER } from '@src/libs/constants';
 import NoteContainer from './NoteContainer';
 import Editor from '../rich-text-editor/Editor';
 import UserRoleDropdown from '../rich-text-editor/UserRoleDropdown';
 import { useUserRole } from '../../contexts/UserRoleContext';
-import { USER_ROLE_EDITOR, USER_ROLE_VIEWER } from '../../libs/constants';
 
 const PLACEHOLDER_TEXT_TITLE = 'Title';
 
@@ -17,7 +17,16 @@ function Notes(): JSX.Element {
 
   const handleExampleIpcRendererFunctionCall = async () => {
     // Call the example method exposed in preload.ts
-    const response = await window.example.exampleMethod();
+    const notesBody = {
+      noteTitle: 'Example Note',
+      body: { content: 'This is an example note content.' },
+    };
+
+    console.log(notesBody);
+
+    const response = await window.notes.saveNote('Example Note', {
+      content: 'This is an example note content.',
+    });
     console.log('Got this back from main:', response);
     alert(JSON.stringify(response, null, 2));
   };

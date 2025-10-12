@@ -13,7 +13,7 @@ import {
   Eye,
   Edit3,
 } from 'lucide-react';
-import { HeadingOption, AlignOption, HeadingTag, UserRolesOptions } from '../types/types';
+import { HeadingOption, AlignOption, HeadingTag, UserRolesOptions } from './types/lexical-types';
 
 const APP_NAME = 'Scribe';
 const SOME_PLACE_HODLER = 'Some Place Holder';

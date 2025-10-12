@@ -1,5 +1,6 @@
 import { ipcRenderer, contextBridge } from 'electron';
-import { SAVE_NOTE } from './ipc/ipc-constants';
+import { SAVE_NOTE } from '@shared/constants/ipc-constants';
+import { SaveNote } from '@shared/types/ipc-types';
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {
@@ -22,15 +23,12 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   saveNote(notesName: string, content: string) {
     return ipcRenderer.invoke(SAVE_NOTE, { notesName, content });
   },
-
-  // Expose other APIs you need here.
-  // ...
 });
 
 contextBridge.exposeInMainWorld('notes', {
-  saveNote: async (...args: Parameters<typeof ipcRenderer.on>) => {
-    console.log('Saving note from preload with args:', args);
-    return ipcRenderer.invoke(SAVE_NOTE, ...args);
+  saveNote: async (note: SaveNote) => {
+    console.log('Saving note from preload with args:', note);
+    return ipcRenderer.invoke(SAVE_NOTE, note);
   },
 });
 

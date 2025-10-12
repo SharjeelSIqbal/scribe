@@ -1,5 +1,5 @@
 import { useRef, useState, ReactNode } from 'react';
-import { HOVERED } from '../../libs/styles-constants';
+import { HOVERED } from '@src/libs/styles-constants';
 
 interface ToolbarDropdownProps {
   children: ReactNode;

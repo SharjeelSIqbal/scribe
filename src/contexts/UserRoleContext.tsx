@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
-import userRoles from '../libs/user-roles.json';
-import { USER_ROLE_EDITOR } from '../libs/constants';
+import userRoles from '@src/libs/user-roles.json';
+import { USER_ROLE_EDITOR } from '@src/libs/constants';
 
 interface UserRoleContextValue {
   userRole: (typeof userRoles)[number];

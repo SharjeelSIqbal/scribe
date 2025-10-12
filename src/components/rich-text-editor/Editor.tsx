@@ -9,14 +9,14 @@ import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { useCallback, useRef, useState } from 'react';
 import { EditorState } from 'lexical';
+import { PLACEHOLDER_TEXT, USER_ROLE_EDITOR } from '@src/libs/constants';
+import editorConfig from '@src/libs/editor-config';
+import { SAVE_NOTE } from '@shared/constants/ipc-constants';
 import Toolbar from './Toolbar';
-import { PLACEHOLDER_TEXT, USER_ROLE_EDITOR } from '../../libs/constants';
-import editorConfig from '../../libs/editor-config';
 import OnChangePlugin from '../../lexical-custom-plugins/OnChangePlugin';
 import EditorEditableToggle from '../../lexical-custom-plugins/EditorEditableToggle';
 import { useUserRole } from '../../contexts/UserRoleContext';
 import { SaveShortcutPlugin } from '../../lexical-custom-plugins/OnSavePlugin';
-import { SAVE_NOTE } from '../../../electron/ipc/ipc-constants';
 
 export default function Editor(): JSX.Element {
   const [editor, setEditorState] = useState<EditorState>();
