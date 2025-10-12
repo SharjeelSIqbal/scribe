@@ -9,31 +9,20 @@ import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { useCallback, useRef, useState } from 'react';
 import { EditorState } from 'lexical';
 import { PLACEHOLDER_TEXT, USER_ROLE_EDITOR } from '@src/libs/constants';
-import { SAVE_NOTE } from '@shared/constants/ipc-constants';
 import OnChangePlugin from '@lexical-custom-plugins/OnChangePlugin';
 import EditorEditableToggle from '@lexical-custom-plugins/EditorEditableToggle';
-import { SaveShortcutPlugin } from '@lexical-custom-plugins/OnSavePlugin';
 import WordCountPlugin from '@lexical-custom-plugins/WordCountPlugin';
 import { useUserRole } from '../../contexts/UserRoleContext';
 import Toolbar from './Toolbar';
 
 export default function Editor(): JSX.Element {
-  const [editor, setEditorState] = useState<EditorState>();
+  const [__, setEditorState] = useState<EditorState>();
   const editableRef = useRef<HTMLDivElement | null>(null);
   const { userRole } = useUserRole();
 
   const handleEditorChange = useCallback((editorState: EditorState) => {
     setEditorState(editorState);
   }, []);
-
-  const handleEditorSave = useCallback(() => {
-    if (userRole !== USER_ROLE_EDITOR || !editor) return;
-
-    const content = editor.toJSON();
-    window.ipcRenderer.invoke(SAVE_NOTE, { notesName: 'Some title', content }).then((res) => {
-      console.log('Saved file to:', res.path);
-    });
-  }, [editor, userRole]);
 
   return (
     <div>
@@ -65,7 +54,6 @@ export default function Editor(): JSX.Element {
       <CheckListPlugin />
       <LinkPlugin />
       <TabIndentationPlugin />
-      <SaveShortcutPlugin onSave={handleEditorSave} />
     </div>
   );
 }

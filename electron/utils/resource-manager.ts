@@ -12,7 +12,6 @@ export function getRamUsage() {
 export async function getDiagnostics() {
   const cpuUsage = await getCpuUsage();
   const ramUsage = getRamUsage();
-  // eslint-disable-next-line
   console.log({ cpuUsage, ramUsage });
 }
 

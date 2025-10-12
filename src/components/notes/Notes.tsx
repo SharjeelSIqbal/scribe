@@ -2,6 +2,7 @@ import { useState, ChangeEvent } from 'react';
 import { USER_ROLE_EDITOR, USER_ROLE_VIEWER } from '@src/libs/constants';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { Note } from '@shared/types/types';
+import SaveNotePlugin from '@lexical-custom-plugins/SaveNotePlugin';
 import NoteContainer from './NoteContainer';
 import Editor from '../rich-text-editor/Editor';
 import UserRoleDropdown from '../rich-text-editor/UserRoleDropdown';
@@ -20,13 +21,17 @@ function Notes(): JSX.Element {
 
   const handleExampleIpcRendererFunctionCall = async () => {
     const editorJsonContent = editor.getEditorState().toJSON();
-    const date: string = Date.now().toString();
+    const date: Date = new Date();
     const id: string = `id-${date}`;
     const noTitle = `newNote.${date}`;
+    const createdAt = date;
+    const updatedAt = date;
     const notesBody = {
       id: `id-${id}`,
       title: title || noTitle,
       body: { content: editorJsonContent },
+      createdAt,
+      updatedAt,
     } as Note;
 
     await window.notes.saveNote(notesBody);
@@ -34,9 +39,6 @@ function Notes(): JSX.Element {
 
   return (
     <NoteContainer>
-      <button type="button" onClick={() => handleExampleIpcRendererFunctionCall()}>
-        Hit me{' '}
-      </button>
       <div className="flex w-full flex-col lg:flex-col">
         <div className="py-1.5 relative h-14 flex justify-between items-center">
           <div className="w-[90%] relative min-h-4 h-full flex items-center">
@@ -58,6 +60,7 @@ function Notes(): JSX.Element {
         </div>
         <div className="py-1.5 ">
           <Editor />
+          <SaveNotePlugin handleSave={handleExampleIpcRendererFunctionCall} />
         </div>
       </div>
     </NoteContainer>

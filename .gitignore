@@ -31,3 +31,5 @@ tail-logs.sh
 
 .env
 .env.local
+
+feature-notes
