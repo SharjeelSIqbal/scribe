@@ -1,4 +1,3 @@
-import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
@@ -10,7 +9,6 @@ import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { useCallback, useRef, useState } from 'react';
 import { EditorState } from 'lexical';
 import { PLACEHOLDER_TEXT, USER_ROLE_EDITOR } from '@src/libs/constants';
-import editorConfig from '@src/libs/editor-config';
 import { SAVE_NOTE } from '@shared/constants/ipc-constants';
 import Toolbar from './Toolbar';
 import OnChangePlugin from '../../lexical-custom-plugins/OnChangePlugin';
@@ -37,7 +35,7 @@ export default function Editor(): JSX.Element {
   }, [editor, userRole]);
 
   return (
-    <LexicalComposer initialConfig={editorConfig}>
+    <div>
       <Toolbar />
       <EditorEditableToggle />
       <div className="relative py-1">
@@ -66,6 +64,6 @@ export default function Editor(): JSX.Element {
       <LinkPlugin />
       <TabIndentationPlugin />
       <SaveShortcutPlugin onSave={handleEditorSave} />
-    </LexicalComposer>
+    </div>
   );
 }
