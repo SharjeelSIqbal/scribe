@@ -338,8 +338,8 @@ export default function EditorToolbar() {
               {ALIGN_OPTIONS.map((option, index) => (
                 <li key={option.value} tabIndex={index}>
                   <button
-                    type="submit"
-                    onSubmit={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, option.value)}
+                    type="button"
+                    onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, option.value)}
                     className={`flex items-center gap-2 sidebar-hover px-2 py-1 rounded hover:bg-base-300 ${
                       align === option.value ? 'bg-base-300 rounded active' : ''
                     }`}
