@@ -17,6 +17,8 @@ class NoteService {
   }
 }
 
+console.log('testing git changes in NoteService');
+
 const noteService = new NoteService();
 
 export default noteService;
