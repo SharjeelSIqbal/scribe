@@ -1,7 +1,8 @@
+import { NoteType, NoteTypeJson } from '@shared/types/types';
 import type { SerializedEditorState, SerializedLexicalNode } from 'lexical';
 import { v4 as uuidv4 } from 'uuid'; // You can use uuid for unique IDs
 
-export class Note {
+export class Note implements NoteType {
   id: string;
   createdAt: Date;
   updatedAt?: Date | null = null;
@@ -36,7 +37,7 @@ export class Note {
     this.updatedAt = new Date();
   }
 
-  toJSON() {
+  toJSON(): NoteTypeJson {
     return {
       id: this.id,
       createdAt: this.createdAt.toISOString(),
@@ -56,3 +57,5 @@ export class Note {
     );
   }
 }
+
+export default Note;

@@ -1,4 +1,5 @@
-import { Note } from '@shared/types/types';
+import { NoteType } from '@shared/types/types';
+import Note from '@service-layer/classes/Note';
 
 class NoteService {
   constructor() {
@@ -12,12 +13,11 @@ class NoteService {
    * @param note {Note}
    * @return {void}
    */
-  async saveNote(note: Note): Promise<void> {
+
+  async saveNote(note: NoteType): Promise<void> {
     return window.notes.saveNote(note);
   }
 }
-
-console.log('testing git changes in NoteServices ');
 
 const noteService = new NoteService();
 

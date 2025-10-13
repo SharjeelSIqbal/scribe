@@ -1,11 +1,11 @@
-import { Note } from '@shared/types/types';
+import { NoteType } from '@shared/types/types';
 
 export {};
 
 declare global {
   interface Window {
     notes: {
-      saveNote: (note: Note) => Promise<void>;
+      saveNote: (note: NoteType) => Promise<void>;
     };
   }
 }
