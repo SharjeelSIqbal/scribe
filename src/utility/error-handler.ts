@@ -4,12 +4,11 @@ class ErrorHandler {
   message: string;
 
   constructor(error: Error | null = null, message: string = '') {
-    // Initialization if needed
     this.error = error;
     this.message = message;
   }
 
-  static handleError(error: Error, context: string) {
+  static logError(error: Error, context: string) {
     const formattedMessage = `[${context}] ${error.message}`;
     console.error(formattedMessage);
     console.error(error.stack);
@@ -19,10 +18,6 @@ class ErrorHandler {
 
   static createFriendlyErrorMessaage(message: string): string {
     return `An error occurred: ${message}. Please try again or contact support if the issue persists.`;
-  }
-
-  static logError(error: Error, context: string) {
-    console.error(`Error in ${context}:`, error);
   }
 }
 
