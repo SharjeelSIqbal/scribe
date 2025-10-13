@@ -20,6 +20,7 @@ function Notes(): JSX.Element {
   };
 
   const handleExampleIpcRendererFunctionCall = async () => {
+    console.log('saving here');
     const editorJsonContent = editor.getEditorState().toJSON();
     const date: Date = new Date();
     const id: string = `id-${date}`;

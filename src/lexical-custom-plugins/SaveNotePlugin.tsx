@@ -1,9 +1,8 @@
-import { createCommand, KEY_DOWN_COMMAND } from 'lexical';
+import { COMMAND_PRIORITY_CRITICAL, KEY_DOWN_COMMAND } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import noteService from 'src/services/NoteService';
 import debounce from '../utility/debouce';
-
-export const SAVE_DOCUMENT_COMMAND = createCommand<void>();
 
 type SavePluginProps = {
   handleSave: () => Promise<void>;
@@ -11,16 +10,11 @@ type SavePluginProps = {
 
 function SaveNotePlugin({ handleSave }: SavePluginProps) {
   const [editor] = useLexicalComposerContext();
+  const [timerDelay, setTimerDelay] = useState<100 | 5000>(100);
 
-  useEffect(() => {
-    return editor.registerCommand(
-      SAVE_DOCUMENT_COMMAND,
-      () => {
-        return true;
-      },
-      0
-    );
-  }, [editor]);
+  const saved = () => {
+    console.log('saved after ctrl + s');
+  };
 
   useEffect(() => {
     return editor.registerCommand(
@@ -28,18 +22,20 @@ function SaveNotePlugin({ handleSave }: SavePluginProps) {
       (event: KeyboardEvent) => {
         if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 's') {
           event.preventDefault();
-          debounce(handleSave, 100);
+          console.log('hits');
+          setTimerDelay(100);
           return true;
         }
-
-        debounce(handleSave, 5000);
+        setTimerDelay(5000);
+        const saveDebounce = debounce(saved, timerDelay);
+        saveDebounce();
         return false;
       },
-      0
+      COMMAND_PRIORITY_CRITICAL
     );
   }, [editor]);
 
-  return <div id="#save-note-plugin" />;
+  return null;
 }
 
 export default SaveNotePlugin;
