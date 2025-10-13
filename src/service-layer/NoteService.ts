@@ -17,7 +17,7 @@ class NoteService {
   }
 }
 
-console.log('testing git changes in NoteService');
+console.log('testing git changes in NoteServices ');
 
 const noteService = new NoteService();
 
