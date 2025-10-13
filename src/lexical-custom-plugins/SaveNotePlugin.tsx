@@ -1,16 +1,18 @@
 import { COMMAND_PRIORITY_CRITICAL, KEY_DOWN_COMMAND } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { useEffect, useState } from 'react';
-import noteService from 'src/services/NoteService';
+import { useEffect, useMemo, useState } from 'react';
+import noteService from 'src/service-layer/NoteService';
 import debounce from '../utility/debouce';
 
-type SavePluginProps = {
-  handleSave: () => Promise<void>;
-};
-
-function SaveNotePlugin({ handleSave }: SavePluginProps) {
+function SaveNotePlugin() {
   const [editor] = useLexicalComposerContext();
   const [timerDelay, setTimerDelay] = useState<100 | 5000>(100);
+
+  // const handleSaveImmediately = useMemo(() => {
+  //   return debounce(async () => {
+  //     await noteService.saveNote();
+  //   }, 100);
+  // }, [editor]);
 
   const saved = () => {
     console.log('saved after ctrl + s');
