@@ -30,6 +30,22 @@ contextBridge.exposeInMainWorld('notes', {
     console.log('Saving note from preload with args:', note);
     return ipcRenderer.invoke(SAVE_NOTE, note);
   },
+  readNote: async (noteId: string) => {
+    console.log('Reading note from preload with args:', noteId);
+    return ipcRenderer.invoke('read-note', noteId);
+  },
+  deleteNote: async (noteId: string) => {
+    console.log('Deleting note from preload with args:', noteId);
+    return ipcRenderer.invoke('delete-note', noteId);
+  },
+  listNotes: async () => {
+    console.log('Listing notes from preload');
+    return ipcRenderer.invoke('list-notes');
+  },
+  searchNotes: async (query: string) => {
+    console.log('Searching notes from preload with query:', query);
+    return ipcRenderer.invoke('search-notes', query);
+  },
 });
 
 contextBridge.exposeInMainWorld('example', {
