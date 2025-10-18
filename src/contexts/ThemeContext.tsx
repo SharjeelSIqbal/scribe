@@ -13,12 +13,12 @@ const STORAGE_KEY = 'theme';
 const DATA_ATTR = 'data-theme';
 const DEFAULT_THEME: Theme = 'light';
 
-export function ThemeProvider({
+export function ThemeContextProvider({
   children,
   defaultTheme = DEFAULT_THEME,
 }: {
   children: ReactNode;
-  defaultTheme?: Theme;
+  defaultTheme: Theme;
 }): JSX.Element {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
@@ -37,11 +37,6 @@ export function ThemeProvider({
 
   return <ThemeContext.Provider value={contextValue}>{children}</ThemeContext.Provider>;
 }
-
-// Provide defaultProps to satisfy react/require-default-props
-ThemeProvider.defaultProps = {
-  defaultTheme: DEFAULT_THEME,
-};
 
 export function useTheme(): ThemeContextValue {
   const ctx = useContext(ThemeContext);

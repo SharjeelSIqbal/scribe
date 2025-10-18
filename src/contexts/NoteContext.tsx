@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { NoteModel } from '@shared/types/data-model/note-model';
-import errorHandler from 'src/service-layer/ErrorHandlingService';
+import errorHandler from '@src/service-layer/ErrorHandlingService';
 
 interface NoteContextValue {
   note: NoteModel | null;
@@ -18,8 +18,8 @@ const NoteContext = createContext<NoteContextValue | undefined>(undefined);
  * @param {ReactNode} children - child components
  * @return {JSX.Element}
  */
-export function NoteContextComponent({ children }: { children: ReactNode }): JSX.Element {
-  const [note, setNote] = useState<NoteModel | null>(null);
+export function NoteContextProvider({ children }: { children: ReactNode }): JSX.Element {
+  const [note, setNote] = useState<NoteModel | null>({} as NoteModel);
 
   const contextValue = useMemo(() => ({ note, setNote }), [note]);
 
@@ -41,7 +41,11 @@ export function useNoteContext(): NoteContextValue | null {
       NOTE_CONTEXT_NAME
     );
     errorHandler.createFriendlyErrorMessage(`Context not found for NoteContext`);
-    return null;
+    console.log('testing');
+    return {
+      note: null,
+      setNote: () => {},
+    };
   }
   return context;
 }

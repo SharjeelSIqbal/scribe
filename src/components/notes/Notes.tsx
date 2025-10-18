@@ -1,20 +1,26 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
 import { USER_ROLE_EDITOR, USER_ROLE_VIEWER } from '@src/libs/constants';
 import SaveNotePlugin from '@lexical-custom-plugins/SaveNotePlugin';
+import { useUserRole } from '@contexts/UserRoleContext';
+import { useNoteContext } from '@contexts/NoteContext';
 import NoteContainer from './NoteContainer';
 import Editor from '../rich-text-editor/Editor';
 import UserRoleDropdown from '../rich-text-editor/UserRoleDropdown';
-import { useUserRole } from '../../contexts/UserRoleContext';
 
 const PLACEHOLDER_TEXT_TITLE = 'Title';
 
 function Notes(): JSX.Element {
   const [title, setTitle] = useState<string>('');
+  const { note, setNote } = useNoteContext();
   const { userRole } = useUserRole();
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
+
+  useEffect(() => {
+    setNote();
+  }, []);
 
   return (
     <NoteContainer>

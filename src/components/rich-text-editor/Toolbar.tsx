@@ -59,9 +59,9 @@ import {
   UNDERLINE_VALUE,
   STRIKETHROUGH_VALUE,
 } from '@src/libs/constants';
+import { useUserRole } from '@contexts/UserRoleContext';
 import registerToolbarCommands from '../../editor/registerCommands';
 import ToolbarDropdown from '../layout/ToolbarDropdown';
-import { useUserRole } from '../../contexts/UserRoleContext';
 
 /**
  * @date 9/20/2025, 9:18:12 AM

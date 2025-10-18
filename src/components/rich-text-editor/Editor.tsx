@@ -12,7 +12,7 @@ import { PLACEHOLDER_TEXT, USER_ROLE_EDITOR } from '@src/libs/constants';
 import OnChangePlugin from '@lexical-custom-plugins/OnChangePlugin';
 import EditorEditableToggle from '@lexical-custom-plugins/EditorEditableToggle';
 import WordCountPlugin from '@lexical-custom-plugins/WordCountPlugin';
-import { useUserRole } from '../../contexts/UserRoleContext';
+import { useUserRole } from '@contexts/UserRoleContext';
 import Toolbar from './Toolbar';
 
 export default function Editor(): JSX.Element {

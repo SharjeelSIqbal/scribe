@@ -1,6 +1,6 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
-import { OnChangePluginProps } from '../props/LexicalProps';
+import { OnChangePluginProps } from '@src/props/LexicalProps';
 
 /**
  * @date 9/20/2025, 9:54:11 AM

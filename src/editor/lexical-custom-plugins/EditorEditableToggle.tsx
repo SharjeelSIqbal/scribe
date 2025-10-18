@@ -1,7 +1,7 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useEffect } from 'react';
 import { USER_ROLE_EDITOR } from '@src/libs/constants';
-import { useUserRole } from '../contexts/UserRoleContext';
+import { useUserRole } from '@contexts/UserRoleContext';
 
 function EditorEditableToggle() {
   const [editor] = useLexicalComposerContext();

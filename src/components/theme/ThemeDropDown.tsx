@@ -1,5 +1,5 @@
 import themes from '@src/libs/themes.json';
-import { useTheme } from '../../contexts/ThemeContext';
+import { useTheme } from '@contexts/ThemeContext';
 
 function ThemeDropDown(): JSX.Element {
   const { theme, setTheme } = useTheme();

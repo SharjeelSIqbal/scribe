@@ -25,9 +25,11 @@
     "paths": {
     "@shared/*": ["shared/*"],
     "@electron/*": ["electron/*"],
-    "@src/libs/*": ["src/libs/*"],
-    "@lexical-custom-plugins/*": ["src/lexical-custom-plugins/*"],
+    "@src/*": ["src/*"],
     "@service-layer/*": ["src/service-layer/*"],
+    "@utility/*": ["src/utility/*"],
+    "@contexts/*": ["src/contexts/*"],
+    "@lexical-custom-plugins/*": ["src/editor/lexical-custom-plugins/*"],
     },
   },
   "include": ["src", "electron", "shared/lexical-types.ts", "shared/ipc-constants.ts", "src/types/global.d.ts"],

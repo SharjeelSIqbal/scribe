@@ -18,7 +18,7 @@ export default defineConfig({
             alias: {
               '@shared': path.resolve(__dirname, 'shared/'),
               '@electron': path.resolve(__dirname, 'electron/'),
-              '@src/libs': path.resolve(__dirname, 'src/libs/'),
+              '@src': path.resolve(__dirname, 'src/'),
               '@services-layer': path.resolve(__dirname, 'src/service-layer/'),
             },
           },
@@ -45,9 +45,11 @@ export default defineConfig({
     alias: {
       '@shared': path.resolve(__dirname, 'shared/'),
       '@electron': path.resolve(__dirname, 'electron/'),
-      '@src/libs': path.resolve(__dirname, 'src/libs/'),
-      '@lexical-custom-plugins': path.resolve(__dirname, 'src/lexical-custom-plugins/'),
+      '@src': path.resolve(__dirname, 'src/'),
+      '@lexical-custom-plugins': path.resolve(__dirname, 'src/editor/lexical-custom-plugins/'),
       '@services-layer': path.resolve(__dirname, 'src/service-layer/'),
+      '@utility': path.resolve(__dirname, 'src/utility/'),
+      '@contexts': path.resolve(__dirname, 'src/contexts/'),
     },
   },
 });

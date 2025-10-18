@@ -10,7 +10,7 @@ interface UserRoleContextValue {
 const STORAGE_KEY = 'user-role';
 const DATA_ATTR = 'data-user-role';
 
-const UserRoleProvider = createContext<UserRoleContextValue | undefined>(undefined);
+const UserRoleContext = createContext<UserRoleContextValue | undefined>(undefined);
 
 /**
  * @date 9/20/2025, 10:16:51 AM
@@ -20,12 +20,12 @@ const UserRoleProvider = createContext<UserRoleContextValue | undefined>(undefin
  * @param {string} defaultUserRole - default user role if none is set in localStorage
  * @return {JSX.Element}
  */
-export function UserRoleProviderComponent({
+export function UserRoleContextProvider({
   children,
   defaultUserRole = USER_ROLE_EDITOR,
 }: {
   children: ReactNode;
-  defaultUserRole?: (typeof userRoles)[number];
+  defaultUserRole: (typeof userRoles)[number];
 }): JSX.Element {
   const [userRole, setUserRole] = useState<(typeof userRoles)[number]>(() => {
     const saved = localStorage.getItem(STORAGE_KEY) as (typeof userRoles)[number] | null;
@@ -39,12 +39,8 @@ export function UserRoleProviderComponent({
 
   const contextValue = useMemo(() => ({ userRole, setUserRole }), [userRole]);
 
-  return <UserRoleProvider.Provider value={contextValue}>{children}</UserRoleProvider.Provider>;
+  return <UserRoleContext.Provider value={contextValue}>{children}</UserRoleContext.Provider>;
 }
-
-UserRoleProviderComponent.defaultProps = {
-  defaultUserRole: userRoles[0],
-};
 
 /**
  * @date 9/20/2025, 10:16:33 AM
@@ -53,9 +49,9 @@ UserRoleProviderComponent.defaultProps = {
  * @return {UserRoleContextValue}
  */
 export function useUserRole(): UserRoleContextValue {
-  const ctx = useContext(UserRoleProvider);
+  const ctx = useContext(UserRoleContext);
   if (!ctx) {
-    throw new Error('useUserRole must be used within a UserRoleProvider');
+    throw new Error('useUserRole must be used within a UserRoleContext');
   }
   return ctx;
 }
