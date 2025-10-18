@@ -13,19 +13,10 @@ const STORAGE_KEY = 'theme';
 const DATA_ATTR = 'data-theme';
 const DEFAULT_THEME: Theme = 'light';
 
-export function ThemeContextProvider({
-  children,
-  defaultTheme = DEFAULT_THEME,
-}: {
-  children: ReactNode;
-  defaultTheme: Theme;
-}): JSX.Element {
+export function ThemeContextProvider({ children }: { children: ReactNode }): JSX.Element {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem(STORAGE_KEY) as Theme | null;
-      return saved ?? defaultTheme;
-    }
-    return defaultTheme;
+    const saved = localStorage.getItem(STORAGE_KEY) as Theme | null;
+    return saved ?? DEFAULT_THEME;
   });
 
   useEffect(() => {

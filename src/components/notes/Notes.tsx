@@ -11,7 +11,7 @@ const PLACEHOLDER_TEXT_TITLE = 'Title';
 
 function Notes(): JSX.Element {
   const [title, setTitle] = useState<string>('');
-  const { note, setNote } = useNoteContext();
+  const { note } = useNoteContext();
   const { userRole } = useUserRole();
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +19,7 @@ function Notes(): JSX.Element {
   };
 
   useEffect(() => {
-    setNote();
+    console.log(note);
   }, []);
 
   return (

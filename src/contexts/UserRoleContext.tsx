@@ -20,16 +20,10 @@ const UserRoleContext = createContext<UserRoleContextValue | undefined>(undefine
  * @param {string} defaultUserRole - default user role if none is set in localStorage
  * @return {JSX.Element}
  */
-export function UserRoleContextProvider({
-  children,
-  defaultUserRole = USER_ROLE_EDITOR,
-}: {
-  children: ReactNode;
-  defaultUserRole: (typeof userRoles)[number];
-}): JSX.Element {
+export function UserRoleContextProvider({ children }: { children: ReactNode }): JSX.Element {
   const [userRole, setUserRole] = useState<(typeof userRoles)[number]>(() => {
     const saved = localStorage.getItem(STORAGE_KEY) as (typeof userRoles)[number] | null;
-    return saved ?? defaultUserRole;
+    return saved ?? USER_ROLE_EDITOR;
   });
 
   useEffect(() => {

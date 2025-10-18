@@ -19,7 +19,7 @@ const NoteContext = createContext<NoteContextValue | undefined>(undefined);
  * @return {JSX.Element}
  */
 export function NoteContextProvider({ children }: { children: ReactNode }): JSX.Element {
-  const [note, setNote] = useState<NoteModel | null>({} as NoteModel);
+  const [note, setNote] = useState<NoteModel | null>(null);
 
   const contextValue = useMemo(() => ({ note, setNote }), [note]);
 
@@ -33,7 +33,7 @@ export function NoteContextProvider({ children }: { children: ReactNode }): JSX.
  * @return {NoteContextValue}
  */
 
-export function useNoteContext(): NoteContextValue | null {
+export function useNoteContext(): NoteContextValue {
   const context = useContext(NoteContext);
   if (!context) {
     errorHandler.logError(
@@ -41,11 +41,7 @@ export function useNoteContext(): NoteContextValue | null {
       NOTE_CONTEXT_NAME
     );
     errorHandler.createFriendlyErrorMessage(`Context not found for NoteContext`);
-    console.log('testing');
-    return {
-      note: null,
-      setNote: () => {},
-    };
+    throw new Error(`Note context doesn't exist`);
   }
   return context;
 }
