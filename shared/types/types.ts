@@ -16,4 +16,4 @@ type NoteTypeJson = {
   body: { content: SerializedEditorState<SerializedLexicalNode> };
 };
 
-export type { NoteType, NoteTypeJson };
+export type { NoteType as NoteModel, NoteTypeJson as NoteModelJson };

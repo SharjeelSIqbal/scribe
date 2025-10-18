@@ -1,11 +1,10 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
-import userRoles from '@src/libs/user-roles.json';
-import { NoteType } from '@shared/types/types';
+import { NoteModel } from '@shared/types/types';
 import errorHandler from 'src/service-layer/ErrorHandlingService';
 
 interface NoteContextValue {
-  note: NoteType | null;
-  setNote: (note: NoteType | null) => void;
+  note: NoteModel | null;
+  setNote: (note: NoteModel | null) => void;
 }
 
 const NOTE_CONTEXT_NAME = 'NoteContext';
@@ -20,7 +19,7 @@ const NoteContext = createContext<NoteContextValue | undefined>(undefined);
  * @return {JSX.Element}
  */
 export function NoteContextComponent({ children }: { children: ReactNode }): JSX.Element {
-  const [note, setNote] = useState<NoteType | null>(null);
+  const [note, setNote] = useState<NoteModel | null>(null);
 
   const contextValue = useMemo(() => ({ note, setNote }), [note]);
 

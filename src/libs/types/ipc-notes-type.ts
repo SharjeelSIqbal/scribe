@@ -1,5 +1,5 @@
-import { NoteType } from '@shared/types/types';
+import { NoteModel } from '@shared/types/types';
 
 export interface Notes {
-  saveNote: (note: NoteType) => Promise<void>;
+  saveNote: (note: NoteModel) => Promise<void>;
 }

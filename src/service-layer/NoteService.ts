@@ -1,9 +1,12 @@
-import { NoteType } from '@shared/types/types';
-import Note from '@service-layer/classes/Note';
+import { NoteModel } from '@shared/types/types';
+import { UserModel } from '@shared/types/data-model/user-model';
+import demoUser from 'src/utility/sample-user';
 
 class NoteService {
-  constructor() {
-    this.saveNote = this.saveNote.bind(this);
+  user: UserModel | null = null;
+
+  constructor(user: UserModel) {
+    this.user = user;
   }
 
   /**
@@ -14,11 +17,27 @@ class NoteService {
    * @return {void}
    */
 
-  async saveNote(note: NoteType): Promise<void> {
+  static async saveNote(note: NoteModel): Promise<void> {
     return window.notes.saveNote(note);
+  }
+
+  static async readNote(noteId: string): Promise<NoteModel | null> {
+    return window.notes.readNote(noteId);
+  }
+
+  static async deleteNote(noteId: string): Promise<void> {
+    return window.notes.deleteNote(noteId);
+  }
+
+  static async listNotes(): Promise<NoteModel[]> {
+    return window.notes.listNotes();
+  }
+
+  static async searchNotes(query: string): Promise<NoteModel[]> {
+    return window.notes.searchNotes(query);
   }
 }
 
-const noteService = new NoteService();
+const noteService = new NoteService(demoUser);
 
 export default noteService;
