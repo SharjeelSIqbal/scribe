@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
-import { NoteModel } from '@shared/types/types';
+import { NoteModel } from '@shared/types/data-model/note-model';
 import errorHandler from 'src/service-layer/ErrorHandlingService';
 
 interface NoteContextValue {

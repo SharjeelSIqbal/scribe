@@ -1,4 +1,4 @@
-import { NoteModel } from '@shared/types/types';
+import { NoteModel } from '@shared/types/data-model/note-model';
 import { TagModel } from '@shared/types/data-model/tag-model';
 
 export interface Notes {

@@ -1,4 +1,4 @@
-import { NoteModel, NoteModelJson } from '@shared/types/types';
+import { NoteModel, NoteModelJson } from '@shared/types/data-model/note-model';
 import type { SerializedEditorState, SerializedLexicalNode } from 'lexical';
 import { v4 as uuidv4 } from 'uuid'; // You can use uuid for unique IDs
 

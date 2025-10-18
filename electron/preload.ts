@@ -1,6 +1,6 @@
 import { ipcRenderer, contextBridge } from 'electron';
 import { SAVE_NOTE } from '@shared/constants/ipc-constants';
-import { NoteModel } from '@shared/types/types';
+import { NoteModel } from '@shared/types/data-model/note-model';
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld('ipcRenderer', {

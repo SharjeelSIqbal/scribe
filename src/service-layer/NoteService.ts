@@ -1,4 +1,4 @@
-import { NoteModel } from '@shared/types/types';
+import { NoteModel } from '@shared/types/data-model/note-model';
 import { UserModel } from '@shared/types/data-model/user-model';
 import demoUser from 'src/utility/sample-user';
 

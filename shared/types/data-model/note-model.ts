@@ -1,6 +1,6 @@
 import type { SerializedEditorState, SerializedLexicalNode } from 'lexical';
 
-type NoteType = {
+type NoteModel = {
   id: string;
   createdAt: Date;
   updatedAt?: Date | undefined | null;
@@ -8,7 +8,7 @@ type NoteType = {
   body: { content: SerializedEditorState<SerializedLexicalNode> };
 };
 
-type NoteTypeJson = {
+type NoteModelJson = {
   id: string;
   createdAt: string;
   updatedAt?: string;
@@ -16,4 +16,4 @@ type NoteTypeJson = {
   body: { content: SerializedEditorState<SerializedLexicalNode> };
 };
 
-export type { NoteType as NoteModel, NoteTypeJson as NoteModelJson };
+export type { NoteModel, NoteModelJson };
