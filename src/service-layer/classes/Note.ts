@@ -11,18 +11,18 @@ export class Note implements NoteModel {
 
   title: string;
 
-  body: { content: SerializedEditorState<SerializedLexicalNode> };
+  body?: SerializedEditorState<SerializedLexicalNode>;
 
   constructor(
     title: string,
-    body: SerializedEditorState<SerializedLexicalNode>,
+    body?: SerializedEditorState<SerializedLexicalNode>,
     id: string = uuidv4(),
     createdAt: Date = new Date(),
     updatedAt: Date = new Date()
   ) {
     this.id = id;
     this.title = title;
-    this.body = { content: body };
+    this.body = body;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -33,7 +33,7 @@ export class Note implements NoteModel {
   }
 
   updateBody(newBody: SerializedEditorState<SerializedLexicalNode>) {
-    this.body.content = newBody;
+    this.body = newBody;
     this.touch();
   }
 
@@ -54,7 +54,7 @@ export class Note implements NoteModel {
   static fromJSON(data: Note): Note {
     return new Note(
       data.title,
-      data.body.content,
+      data.body,
       data.id,
       new Date(data.createdAt),
       data.updatedAt ? new Date(data.updatedAt) : undefined

@@ -5,8 +5,9 @@ type NoteModel = {
   createdAt: Date;
   updatedAt?: Date | undefined | null;
   title: string;
-  body: { content: SerializedEditorState<SerializedLexicalNode> };
+  body?: SerializedEditorState<SerializedLexicalNode>;
   userId?: string;
+  touch: () => void;
 };
 
 type NoteModelJson = {
@@ -14,7 +15,7 @@ type NoteModelJson = {
   createdAt: string;
   updatedAt?: string;
   title: string;
-  body: { content: SerializedEditorState<SerializedLexicalNode> };
+  body?: SerializedEditorState<SerializedLexicalNode>;
   userId?: string;
 };
 
