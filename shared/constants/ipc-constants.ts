@@ -1,5 +1,9 @@
 const SAVE_NOTE = 'save-note';
 const LIST_NOTES = 'list-notes';
+const READ_NOTE = 'read-note';
+const DELETE_NOTE = 'delete-note';
+const SEARCH_NOTES = 'search-notes';
+const FILTER_NOTES = 'filter-notes';
 
 const SUCCESS_STATUS_MESSAGE = 'success';
 const SUCCESS_STATUS = 200;
@@ -22,6 +26,10 @@ const NOTE_NOT_FOUND_MESSAGE = 'Note not found.';
 export {
   SAVE_NOTE,
   LIST_NOTES,
+  READ_NOTE,
+  DELETE_NOTE,
+  SEARCH_NOTES,
+  FILTER_NOTES,
   SUCCESS_STATUS_MESSAGE,
   SUCCESS_STATUS,
   FAILURE_STATUS_MESSAGE,
