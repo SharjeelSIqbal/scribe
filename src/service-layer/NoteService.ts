@@ -1,14 +1,6 @@
 import { NoteModel } from '@shared/types/data-model/note-model';
-import { UserModel } from '@shared/types/data-model/user-model';
-import demoUser from '@src/utility/sample-user';
 
 class NoteService {
-  user: UserModel | null = null;
-
-  constructor(user: UserModel) {
-    this.user = user;
-  }
-
   /**
    * @date 10/13/2025, 1:03:08 PM
    * @description Save a note using the IPC renderer exposed in the preload script.
@@ -17,7 +9,7 @@ class NoteService {
    * @return {void}
    */
 
-  static async saveNote(note: NoteModel): Promise<void> {
+  async saveNote(note: NoteModel): Promise<void> {
     return window.notes.saveNote(note);
   }
 
@@ -38,6 +30,6 @@ class NoteService {
   }
 }
 
-const noteService = new NoteService(demoUser);
+const noteService = new NoteService();
 
 export default noteService;

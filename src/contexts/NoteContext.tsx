@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { NoteModel } from '@shared/types/data-model/note-model';
 import errorHandler from '@src/service-layer/ErrorHandlingService';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import Note from '@src/service-layer/classes/Note';
 
 interface NoteContextValue {
   note: NoteModel | null;
@@ -19,7 +21,11 @@ const NoteContext = createContext<NoteContextValue | undefined>(undefined);
  * @return {JSX.Element}
  */
 export function NoteContextProvider({ children }: { children: ReactNode }): JSX.Element {
-  const [note, setNote] = useState<NoteModel | null>(null);
+  const [note, setNote] = useState<NoteModel | null>(() => {
+    // Add logic here to queue the previous note, if there was none then skip to creating a new note
+
+    return new Note('Untitled');
+  });
 
   const contextValue = useMemo(() => ({ note, setNote }), [note]);
 

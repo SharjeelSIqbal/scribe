@@ -109,6 +109,8 @@ export default function EditorToolbar() {
   const linkInputRef = useRef<HTMLInputElement | null>(null);
   const { userRole } = useUserRole();
 
+  editor.getEditorState().toJSON();
+
   useEffect(() => {
     if (showLinkInput && linkInputRef.current) {
       linkInputRef.current.focus();
